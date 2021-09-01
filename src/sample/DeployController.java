@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public class DeployController {
+public class DeployController extends DeployControllerOP {
     @FXML
     protected MenuButton standName;
     @FXML
