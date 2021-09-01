@@ -591,7 +591,9 @@ public class Controller extends DeployController {
         iterator++;
         iteratorList++;
         for (Project p : builder.getStartedProjectsList()) {
-            if (p.buildResultStatus.buildState.equalsIgnoreCase("Successful")) {
+            if (p.buildResultStatus.buildState.equalsIgnoreCase("Successful")
+                    & !p.planKey.key.contains("EPZ")
+                    & !p.planKey.key.contains("SPHINX")) {
                 checkBoxListSuccessBuilds.add(new CheckBox(p.branch.name));
                 checkBoxListSuccessBuilds.get(iteratorList).setSelected(true);
                 checkBoxListSuccessBuilds.get(iteratorList).setOnAction(event -> checkUncheckedBox(checkBoxListSuccessBuilds));
@@ -613,7 +615,9 @@ public class Controller extends DeployController {
         iterator++;
         iteratorList++;
         for (Project p : builder.getStartedProjectsList()) {
-            if (p.buildResultStatus.buildState.equalsIgnoreCase("Unknown")) {
+            if (p.buildResultStatus.buildState.equalsIgnoreCase("Unknown")
+                    & !p.planKey.key.contains("EPZ")
+                    & !p.planKey.key.contains("SPHINX")) {
                 checkBoxListUnknownBuilds.add(new CheckBox(p.branch.name));
                 checkBoxListUnknownBuilds.get(iteratorList).setSelected(false);
                 checkBoxListUnknownBuilds.get(iteratorList).setDisable(true);
