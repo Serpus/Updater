@@ -849,4 +849,145 @@ public class Controller extends DeployController {
             goToUrl(url);
         }
     }
+
+
+
+
+
+
+
+    // Деплой ОЧ
+
+
+
+
+
+
+    public void refreshDeploysStatus1op() {
+        // Переделать под ОЧ
+        /*setStatusDeploysListView1();
+        deployer.getDeployResult(1);
+        int i = 0;
+        for (Project p : deployer.getDeployOnStands().get(1)) {
+            String deploymentState = p.deploymentResult.deploymentState;
+            String lifeCycleState = p.deploymentResult.lifeCycleState;
+            if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
+                statusDeploysListView1.getItems().add(new Label());
+                statusDeploysListView1.getItems().get(i).setText(p.branch.name + " = В процессе или очереди\n" +
+                        createUrlForDeploy(p.deploymentResultId[1].deploymentResultId));
+                i++;
+            }
+            if (deploymentState.equalsIgnoreCase("SUCCESS")) {
+                statusDeploysListView1.getItems().add(new Label());
+                statusDeploysListView1.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                        createUrlForDeploy(p.deploymentResultId[1].deploymentResultId));
+                statusDeploysListView1.getItems().get(i).setTextFill(Paint.valueOf("Green"));
+                i++;
+            }
+            if (deploymentState.equalsIgnoreCase("FAILED")) {
+                statusDeploysListView1.getItems().add(new Label());
+                statusDeploysListView1.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                        createUrlForDeploy(p.deploymentResultId[1].deploymentResultId));
+                statusDeploysListView1.getItems().get(i).setTextFill(Paint.valueOf("Red"));
+                i++;
+            }
+        }
+        Main.logger.info("statusDeploysListView1: " + statusDeploysListView1.getItems());
+        openAllDeploys1.setDisable(statusDeploysListView1.getItems().size() <= 0);*/
+    }
+    public void refreshDeploysStatus2op() {
+        // Переделать под ОЧ
+        /*setStatusDeploysListView2();
+        deployer.getDeployResult(2);
+        int i = 0;
+        for (Project p : deployer.getDeployOnStands().get(2)) {
+            String deploymentState = p.deploymentResult.deploymentState;
+            String lifeCycleState = p.deploymentResult.lifeCycleState;
+            if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
+                statusDeploysListView2.getItems().add(new Label());
+                statusDeploysListView2.getItems().get(i).setText(p.branch.name + " = В процессе или очереди\n" +
+                        createUrlForDeploy(p.deploymentResultId[2].deploymentResultId));
+                i++;
+            }
+            if (deploymentState.equalsIgnoreCase("SUCCESS")) {
+                statusDeploysListView2.getItems().add(new Label());
+                statusDeploysListView2.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                        createUrlForDeploy(p.deploymentResultId[2].deploymentResultId));
+                statusDeploysListView2.getItems().get(i).setTextFill(Paint.valueOf("Green"));
+                i++;
+            }
+            if (deploymentState.equalsIgnoreCase("FAILED")) {
+                statusDeploysListView2.getItems().add(new Label());
+                statusDeploysListView2.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                        createUrlForDeploy(p.deploymentResultId[2].deploymentResultId));
+                statusDeploysListView2.getItems().get(i).setTextFill(Paint.valueOf("Red"));
+                i++;
+            }
+        }
+        Main.logger.info("statusDeploysListView2: " + statusDeploysListView2.getItems());
+        openAllDeploys2.setDisable(statusDeploysListView2.getItems().size() <= 0);*/
+
+    }
+    public void refreshDeploysStatus3op() {
+        // Переделать под ОЧ
+        /*setStatusDeploysListView3();
+        deployer.getDeployResult(3);
+        int i = 0;
+        for (Project p : deployer.getDeployOnStands().get(3)) {
+            String deploymentState = p.deploymentResult.deploymentState;
+            String lifeCycleState = p.deploymentResult.lifeCycleState;
+            if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
+                statusDeploysListView3.getItems().add(new Label());
+                statusDeploysListView3.getItems().get(i).setText(p.branch.name + " = В процессе или очереди\n" +
+                        createUrlForDeploy(p.deploymentResultId[3].deploymentResultId));
+                i++;
+            }
+            if (deploymentState.equalsIgnoreCase("SUCCESS")) {
+                statusDeploysListView3.getItems().add(new Label());
+                statusDeploysListView3.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                        createUrlForDeploy(p.deploymentResultId[3].deploymentResultId));
+                statusDeploysListView3.getItems().get(i).setTextFill(Paint.valueOf("Green"));
+                i++;
+            }
+            if (deploymentState.equalsIgnoreCase("FAILED")) {
+                statusDeploysListView3.getItems().add(new Label());
+                statusDeploysListView3.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                        createUrlForDeploy(p.deploymentResultId[3].deploymentResultId));
+                statusDeploysListView3.getItems().get(i).setTextFill(Paint.valueOf("Red"));
+                i++;
+            }
+        }
+        Main.logger.info("statusDeploysListView3: " + statusDeploysListView3.getItems());
+        openAllDeploys3.setDisable(statusDeploysListView3.getItems().size() <= 0);*/
+    }
+
+    /**
+     * Открываем все билды
+     */
+    public void openAllDeploys1op() {
+        for (Label i : statusDeploysListView1op.getItems()) {
+            String labelText = i.getText();
+            String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+            Main.logger.info("URL: " + url);
+            goToUrl(url);
+        }
+    }
+
+    public void openAllDeploys2op() {
+        for (Label i : statusDeploysListView2op.getItems()) {
+            String labelText = i.getText();
+            String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+            Main.logger.info("URL: " + url);
+            goToUrl(url);
+        }
+    }
+
+    public void openAllDeploys3op() {
+        for (Label i : statusDeploysListView3op.getItems()) {
+            String labelText = i.getText();
+            String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+            Main.logger.info("URL: " + url);
+            goToUrl(url);
+        }
+    }
 }
