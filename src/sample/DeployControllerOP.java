@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class DeployControllerOP {
@@ -32,6 +33,20 @@ public class DeployControllerOP {
     @FXML
     protected Button refreshDeploysButton3op;
     @FXML
+    protected Button prepareEpzBd;
+    @FXML
+    protected Button prepareEpz;
+    @FXML
+    protected Button prepareSphinx;
+    @FXML
+    protected Button cancelModalDeployOP;
+    @FXML
+    protected Button confirmDeployOP;
+    @FXML
+    protected DialogPane deployOpModal;
+    @FXML
+    protected GridPane checkboxTableDeploysOP;
+    @FXML
     protected Pane statusDeploysPane1op;
     @FXML
     protected Pane statusDeploysPane2op;
@@ -45,6 +60,8 @@ public class DeployControllerOP {
     protected Label deployStatusStandLabel2op;
     @FXML
     protected Label deployStatusStandLabel3op;
+    @FXML
+    protected Label opProjectName;
     @FXML
     protected ListView<Label> statusDeploysListView1op;
     @FXML
@@ -226,6 +243,30 @@ public class DeployControllerOP {
         addStand3op.setVisible(true);
         removeStand3op.setVisible(false);
         removeStand2op.setVisible(true);
+    }
+
+    public void showDeployModalEpzBd() {
+        deployOpModal.setVisible(true);
+        opProjectName.setText("Собранные билды ЕПЗ БД");
+    }
+
+    public void showDeployModalEpz() {
+        deployOpModal.setVisible(true);
+        opProjectName.setText("Собранные билды ЕПЗ");
+    }
+
+    public void showDeployModalSphinx() {
+        deployOpModal.setVisible(true);
+        opProjectName.setText("Собранные билды Sphinx");
+    }
+
+    public void cancelModalDeployOP() {
+        deployOpModal.setVisible(false);
+        opProjectName.setText("");
+    }
+
+    public void startDeployingOP() {
+
     }
 
 }
