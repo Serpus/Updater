@@ -13,10 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import parser.project.Project;
-import updater.Base;
-import updater.Builder;
-import updater.Deployer;
-import updater.Helper;
+import updater.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -86,6 +83,7 @@ public class Controller extends DeployController {
 
     private Builder builder;
     private Deployer deployer;
+    private DeployerOP deployerOP;
     private ArrayList<CheckBox> checkBoxListEIS;
     private ArrayList<CheckBox> checkBoxListLKP;
     private ArrayList<CheckBox> checkBoxListOP;
@@ -187,12 +185,16 @@ public class Controller extends DeployController {
             logopasError.setVisible(true);
             return;
         }
+        final String user = username.getText();
+        final String pass = password.getText();
         Main.logger.info("Start connecting to username: " + username.getText());
         try {
-            builder = new Builder(username.getText(), password.getText());
-            deployer = new Deployer(username.getText(), password.getText());
+            builder = new Builder(user, pass);
+            deployer = new Deployer(user, pass);
+            deployerOP = new DeployerOP(user, pass);
             auth.setVisible(false);
             tabs.setDisable(false);
+            deployerOP.getOpProjects().addAll(builder.getOpProjectsList());
             Main.logger.info("Success connection");
         } catch (NullPointerException e) {
             status.setVisible(true);

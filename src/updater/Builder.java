@@ -55,7 +55,10 @@ public class Builder extends Base {
         return startedProjectsList;
     }
 
-    DeployerOP deployerOP = new DeployerOP(username, password);
+    private List<Project> opProjectsList;
+    public List<Project> getOpProjectsList() {
+        return opProjectsList;
+    }
 
     /**
      * Очищаем данные для нового набора сборок
@@ -134,7 +137,7 @@ public class Builder extends Base {
             if (x.planKey.key.contains("SPHINX-"))
                 epzProjectsList.add(x);
         }
-        deployerOP.getOpProjects().addAll(epzProjectsList);
+        opProjectsList = new ArrayList<>(epzProjectsList);
         return epzProjectsList;
     }
 
@@ -155,27 +158,6 @@ public class Builder extends Base {
 
         return otherProjectsList;
     }
-
-    /**
-     * Получаем все Environments для реестров
-     */
-    /*public Map<String, List<Environments>> getEnvironments(Set<String> allNeededProjects) {
-        Map<String, List<Environments>> allNeededProjectsEnvironments = new LinkedHashMap<>();
-        Gson g = new Gson();
-        JsonReader reader = new JsonReader(new StringReader(responseProject));
-        reader.setLenient(true);
-        Project[] projects = g.fromJson(reader, Project[].class);
-        for (Project x: projects) {
-            for (String y: allNeededProjects) {
-                try {
-                    if (x.planKey.key.contains(y)) {
-                        allNeededProjectsEnvironments.put(x.planKey.key, x.environments);
-                    }
-                } catch (NullPointerException e) {}
-            }
-        }
-        return allNeededProjectsEnvironments;
-    }*/
 
     /**
      * Получаем все ветки и убираем, которые не нужно обновлять (нет ветки) и сетим в общую мапу
