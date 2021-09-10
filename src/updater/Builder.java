@@ -148,7 +148,6 @@ public class Builder extends Base {
         List<Project> otherProjectsList = new ArrayList<>();
         for (Project x : allProjectList) {
             if (x.planKey.key.contains("EDO-EDO")) otherProjectsList.add(x);
-            if (x.planKey.key.contains("LKO-LKO")) otherProjectsList.add(x);
             if (x.planKey.key.contains("TECH-TECHSUPPORT")) otherProjectsList.add(x);
             if (x.planKey.key.contains("TECH-FSTORETECHWF")) otherProjectsList.add(x);
             if (x.planKey.key.contains("DBF-DBFSCHED")) otherProjectsList.add(x);
