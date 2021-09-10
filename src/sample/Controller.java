@@ -865,6 +865,61 @@ public class Controller extends DeployController {
 
 
 
+    public void showDeployModalEpzBd() {
+        deployOpModal.setVisible(true);
+        opProjectName.setText("Собранные билды ЕПЗ БД");
+        checkBoxListBuildsOP = new ArrayList<>();
+
+        int iteratorList = 0;
+        int iterator = 0;
+
+        checkBoxListBuildsOP.add(new CheckBox("Успешные билды:"));
+        checkBoxListBuildsOP.get(0).setOnAction(event -> {
+            if (checkBoxListBuildsOP.get(0).isSelected())
+                for (CheckBox x : checkBoxListBuildsOP)
+                    x.setSelected(true);
+            else
+                for (CheckBox x : checkBoxListBuildsOP)
+                    x.setSelected(false);
+        });
+        checkBoxListBuildsOP.get(0).setSelected(true);
+        checkBoxListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
+        checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
+        iterator++;
+        iteratorList++;
+        for (Project p : builder.getProjectsWithBranchesMap().get("EPZ")) {
+            if (p.buildResultStatus.buildState.equalsIgnoreCase("Successful")
+                    & !p.planKey.key.contains("EPZ")
+                    & !p.planKey.key.contains("SPHINX")) {
+                checkBoxListBuildsOP.add(new CheckBox(p.branch.name));
+                checkBoxListBuildsOP.get(iteratorList).setSelected(true);
+                checkBoxListBuildsOP.get(iteratorList).setOnAction(event -> checkUncheckedBox(checkBoxListBuildsOP));
+                checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
+                iterator++;
+                iteratorList++;
+            }
+        }
+    }
+
+    public void showDeployModalEpz() {
+        deployOpModal.setVisible(true);
+        opProjectName.setText("Собранные билды ЕПЗ");
+    }
+
+    public void showDeployModalSphinx() {
+        deployOpModal.setVisible(true);
+        opProjectName.setText("Собранные билды Sphinx");
+    }
+
+    public void cancelModalDeployOP() {
+        deployOpModal.setVisible(false);
+        opProjectName.setText("");
+    }
+
+    public void startDeployingOP() {
+
+    }
+
     public void refreshDeploysStatus1op() {
         // Переделать под ОЧ
         /*setStatusDeploysListView1();

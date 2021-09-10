@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+
 public class DeployControllerOP {
     @FXML
     protected MenuButton standNameOP;
@@ -69,7 +71,7 @@ public class DeployControllerOP {
     @FXML
     protected ListView<Label> statusDeploysListView3op;
 
-
+    protected ArrayList<CheckBox> checkBoxListBuildsOP;
 
 
     public void setDeployStatusStandMenuOP() {
@@ -244,29 +246,4 @@ public class DeployControllerOP {
         removeStand3op.setVisible(false);
         removeStand2op.setVisible(true);
     }
-
-    public void showDeployModalEpzBd() {
-        deployOpModal.setVisible(true);
-        opProjectName.setText("Собранные билды ЕПЗ БД");
-    }
-
-    public void showDeployModalEpz() {
-        deployOpModal.setVisible(true);
-        opProjectName.setText("Собранные билды ЕПЗ");
-    }
-
-    public void showDeployModalSphinx() {
-        deployOpModal.setVisible(true);
-        opProjectName.setText("Собранные билды Sphinx");
-    }
-
-    public void cancelModalDeployOP() {
-        deployOpModal.setVisible(false);
-        opProjectName.setText("");
-    }
-
-    public void startDeployingOP() {
-
-    }
-
 }
