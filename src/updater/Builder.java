@@ -190,7 +190,7 @@ public class Builder extends Base {
             BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
             for (Branch i : buildBranches.branches.branch) {
                 if (i.shortName.equalsIgnoreCase(branchName)) {
-                    i.name = i.name.replace("EIS - ", "");
+                    i.name = i.name.replace("PRIV - ", "");
                     x.setBranch(i);
                     localList.add(x);
                     Main.logger.info("Project " + x.planKey.key + " has branch: " + i);
