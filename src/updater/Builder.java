@@ -19,6 +19,10 @@ import java.util.Map;
 
 public class Builder extends Base {
 
+    public Builder(String username, String password) {
+        super(username, password);
+    }
+
     private final String responseProject = getResponse2("https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/all");
     private static int responseCode;
     private List<Project> allProjectList;
@@ -51,10 +55,7 @@ public class Builder extends Base {
         return startedProjectsList;
     }
 
-    public Builder(String username, String password) {
-        super(username, password);
-    }
-
+    DeployerOP deployerOP = new DeployerOP(username, password);
 
     /**
      * Очищаем данные для нового набора сборок
@@ -133,7 +134,7 @@ public class Builder extends Base {
             if (x.planKey.key.contains("SPHINX-"))
                 epzProjectsList.add(x);
         }
-
+        deployerOP.getOpProjects().addAll(epzProjectsList);
         return epzProjectsList;
     }
 
