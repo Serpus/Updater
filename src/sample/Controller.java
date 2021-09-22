@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
+import org.apache.log4j.Logger;
 import parser.project.Project;
 import updater.*;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 
 public class Controller extends DeployController {
+    private static final Logger log = Logger.getLogger(Controller.class);
     @FXML
     private Button confirmCustomBranch;
     @FXML
@@ -147,9 +149,9 @@ public class Controller extends DeployController {
         newBuildingModal.setVisible(true);
         statusBuildsPane.setDisable(true);
         tabs.setDisable(true);
-        Main.logger.info("newBuildingModal.isVisible(): " + newBuildingModal.isVisible());
-        Main.logger.info("statusPane.isVisible(): " + statusBuildsPane.isVisible());
-        Main.logger.info("tabs.isVisible(): " + tabs.isVisible());
+        log.info("newBuildingModal.isVisible(): " + newBuildingModal.isVisible());
+        log.info("statusPane.isVisible(): " + statusBuildsPane.isVisible());
+        log.info("tabs.isVisible(): " + tabs.isVisible());
     }
 
     public void newBuildingConfirm() {
@@ -178,7 +180,7 @@ public class Controller extends DeployController {
         defaultVisibleDeployStatusPane();
         clearDeployList();
         deployer = new Deployer(username.getText(), password.getText());
-        Main.logger.info("Cancel. Success cleaning data");
+        log.info("Cancel. Success cleaning data");
     }
 
     public void newBuildingCancel() {
@@ -195,7 +197,7 @@ public class Controller extends DeployController {
         }
         final String user = username.getText();
         final String pass = password.getText();
-        Main.logger.info("Start connecting to username: " + username.getText());
+        log.info("Start connecting to username: " + username.getText());
         try {
             builder = new Builder(user, pass);
             deployer = new Deployer(user, pass);
@@ -203,7 +205,7 @@ public class Controller extends DeployController {
             auth.setVisible(false);
             tabs.setDisable(false);
             deployerOP.getOpProjects().addAll(builder.getOpProjectsList());
-            Main.logger.info("Success connection");
+            log.info("Success connection");
         } catch (NullPointerException e) {
             status.setVisible(true);
             if (Base.getResponseCode() == 500) {
@@ -211,7 +213,7 @@ public class Controller extends DeployController {
             } else {
                 status.setText("Не получилось( Попробуйте ещё раз.");
             }
-            Main.logger.info("Failed connection with response code: " + Base.getResponseCode());
+            log.info("Failed connection with response code: " + Base.getResponseCode());
         }
     }
 
@@ -245,7 +247,7 @@ public class Controller extends DeployController {
         checkBoxListLKP = new ArrayList<>();
         checkBoxListOP = new ArrayList<>();
         checkBoxListOther = new ArrayList<>();
-        Main.logger.info("branch: " + branch.getText());
+        log.info("branch: " + branch.getText());
         nameBranch.setText(branch.getText());
         builder.setBranchesInMap(branch.getText());
         // Выделяем билды по проектам.
@@ -379,7 +381,7 @@ public class Controller extends DeployController {
         checkBoxListLKP.clear();
         checkBoxListOP.clear();
         checkBoxListOther.clear();
-        Main.logger.info("Cancel modal");
+        log.info("Cancel modal");
     }
 
     public void startBuildsCustomBranch() {
@@ -425,7 +427,7 @@ public class Controller extends DeployController {
             }
         }
 
-        Main.logger.info("builder.getCheckedProjectsList(): " + builder.getCheckedProjectsList());
+        log.info("builder.getCheckedProjectsList(): " + builder.getCheckedProjectsList());
 
         builder.startBuild(builder.getCheckedProjectsList());
         refreshBranchesStatus.setDisable(false);
@@ -437,7 +439,7 @@ public class Controller extends DeployController {
 
         setErrorBuildPlansList();
         if (builder.unStartedBuilds.size() > 0) {
-            Main.logger.info("unStartedBuilds.size(): " + builder.unStartedBuilds.size());
+            log.info("unStartedBuilds.size(): " + builder.unStartedBuilds.size());
             int i = 0;
             for (String x : builder.unStartedBuilds) {
                 errorBuildPlansList.getItems().add(new Label());
@@ -461,7 +463,7 @@ public class Controller extends DeployController {
         errorBuildPlansList.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String url = errorBuildPlansList.getSelectionModel().getSelectedItem().getText();
-                Main.logger.info("URL: " + url);
+                log.info("URL: " + url);
                 goToUrl(url);
             }
         });
@@ -473,7 +475,7 @@ public class Controller extends DeployController {
             if (event.getCode() == KeyCode.ENTER) {
                 String labelText = statusListView.getSelectionModel().getSelectedItem().getText();
                 String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/browse/"));
-                Main.logger.info("URL: " + url);
+                log.info("URL: " + url);
                 goToUrl(url);
             }
         });
@@ -517,7 +519,7 @@ public class Controller extends DeployController {
         for (Label i : statusListView.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/browse/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }
@@ -537,13 +539,13 @@ public class Controller extends DeployController {
     public void setHotfix() {
         branch.clear();
         branch.setText("hotfix-");
-        Main.logger.info("Set branch is hotfix");
+        log.info("Set branch is hotfix");
     }
 
     public void setRelease() {
         branch.clear();
         branch.setText("release-");
-        Main.logger.info("Set branch is release");
+        log.info("Set branch is release");
     }
 
     //
@@ -655,10 +657,10 @@ public class Controller extends DeployController {
         }
         int i = 0;
         int standMenuSize = deployStatusStandMenu.getItems().size();
-        Main.logger.info("standMenuSize: " + standMenuSize);
+        log.info("standMenuSize: " + standMenuSize);
         deployer.setDeployOnStands();
         for (MenuItem item : deployStatusStandMenu.getItems()) {
-            Main.logger.info("Current ITEM: " + item.getText());
+            log.info("Current ITEM: " + item.getText());
             i++;
             deployer.createRelease(i, item.getText());
             deployer.deploy(i);
@@ -678,7 +680,7 @@ public class Controller extends DeployController {
             if (event.getCode() == KeyCode.ENTER) {
                 String labelText = statusDeploysListView1.getSelectionModel().getSelectedItem().getText();
                 String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-                Main.logger.info("URL: " + url);
+                log.info("URL: " + url);
                 goToUrl(url);
             }
         });
@@ -690,7 +692,7 @@ public class Controller extends DeployController {
             if (event.getCode() == KeyCode.ENTER) {
                 String labelText = statusDeploysListView2.getSelectionModel().getSelectedItem().getText();
                 String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-                Main.logger.info("URL: " + url);
+                log.info("URL: " + url);
                 goToUrl(url);
             }
         });
@@ -702,7 +704,7 @@ public class Controller extends DeployController {
             if (event.getCode() == KeyCode.ENTER) {
                 String labelText = statusDeploysListView3.getSelectionModel().getSelectedItem().getText();
                 String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-                Main.logger.info("URL: " + url);
+                log.info("URL: " + url);
                 goToUrl(url);
             }
         });
@@ -754,7 +756,7 @@ public class Controller extends DeployController {
                 i++;
             }
         }
-        Main.logger.info("statusDeploysListView1: " + statusDeploysListView1.getItems());
+        log.info("statusDeploysListView1: " + statusDeploysListView1.getItems());
         openAllDeploys1.setDisable(statusDeploysListView1.getItems().size() <= 0);
     }
     public void refreshDeploysStatus2() {
@@ -785,7 +787,7 @@ public class Controller extends DeployController {
                 i++;
             }
         }
-        Main.logger.info("statusDeploysListView2: " + statusDeploysListView2.getItems());
+        log.info("statusDeploysListView2: " + statusDeploysListView2.getItems());
         openAllDeploys2.setDisable(statusDeploysListView2.getItems().size() <= 0);
 
     }
@@ -817,7 +819,7 @@ public class Controller extends DeployController {
                 i++;
             }
         }
-        Main.logger.info("statusDeploysListView3: " + statusDeploysListView3.getItems());
+        log.info("statusDeploysListView3: " + statusDeploysListView3.getItems());
         openAllDeploys3.setDisable(statusDeploysListView3.getItems().size() <= 0);
     }
 
@@ -837,7 +839,7 @@ public class Controller extends DeployController {
         for (Label i : statusDeploysListView1.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }
@@ -846,7 +848,7 @@ public class Controller extends DeployController {
         for (Label i : statusDeploysListView2.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }
@@ -855,7 +857,7 @@ public class Controller extends DeployController {
         for (Label i : statusDeploysListView3.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }
@@ -957,7 +959,7 @@ public class Controller extends DeployController {
                 i++;
             }
         }
-        Main.logger.info("statusDeploysListView1: " + statusDeploysListView1.getItems());
+        log.info("statusDeploysListView1: " + statusDeploysListView1.getItems());
         openAllDeploys1.setDisable(statusDeploysListView1.getItems().size() <= 0);*/
     }
     public void refreshDeploysStatus2op() {
@@ -989,7 +991,7 @@ public class Controller extends DeployController {
                 i++;
             }
         }
-        Main.logger.info("statusDeploysListView2: " + statusDeploysListView2.getItems());
+        log.info("statusDeploysListView2: " + statusDeploysListView2.getItems());
         openAllDeploys2.setDisable(statusDeploysListView2.getItems().size() <= 0);*/
 
     }
@@ -1022,7 +1024,7 @@ public class Controller extends DeployController {
                 i++;
             }
         }
-        Main.logger.info("statusDeploysListView3: " + statusDeploysListView3.getItems());
+        log.info("statusDeploysListView3: " + statusDeploysListView3.getItems());
         openAllDeploys3.setDisable(statusDeploysListView3.getItems().size() <= 0);*/
     }
 
@@ -1033,7 +1035,7 @@ public class Controller extends DeployController {
         for (Label i : statusDeploysListView1op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }
@@ -1042,7 +1044,7 @@ public class Controller extends DeployController {
         for (Label i : statusDeploysListView2op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }
@@ -1051,7 +1053,7 @@ public class Controller extends DeployController {
         for (Label i : statusDeploysListView3op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
-            Main.logger.info("URL: " + url);
+            log.info("URL: " + url);
             goToUrl(url);
         }
     }

@@ -3,12 +3,12 @@ package updater;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import okhttp3.*;
+import org.apache.log4j.Logger;
 import parser.project.Project;
 import parser.project.branches.Branch;
 import parser.project.branches.BuildBranches;
 import parser.project.buildResult.BuildResult;
 import parser.project.buildResult.BuildResultStatus;
-import sample.Main;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Builder extends Base {
+    private static final Logger log = Logger.getLogger(Builder.class);
 
     public Builder(String username, String password) {
         super(username, password);
@@ -166,7 +167,7 @@ public class Builder extends Base {
         List<Project> localList = new ArrayList<>();
         for (Project x: allProjectsMap.get("EIS")) {
             String responseBranches = getResponse("https://ci-sel.dks.lanit.ru/rest/api/latest/plan/" + x.planKey.key + "/branch");
-            Main.logger.info("responseBranches: " + responseBranches);
+            log.info("responseBranches: " + responseBranches);
             JsonReader reader = new JsonReader(new StringReader(responseBranches));
             BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
             for (Branch i : buildBranches.branches.branch) {
@@ -174,7 +175,7 @@ public class Builder extends Base {
                     i.name = i.name.replace("PRIV - ", "");
                     x.setBranch(i);
                     localList.add(x);
-                    Main.logger.info("Project " + x.planKey.key + " has branch: " + i);
+                    log.info("Project " + x.planKey.key + " has branch: " + i);
                 }
             }
         }
@@ -183,7 +184,7 @@ public class Builder extends Base {
 
         for (Project x: allProjectsMap.get("LKP")) {
             String responseBranches = getResponse("https://ci-sel.dks.lanit.ru/rest/api/latest/plan/" + x.planKey.key + "/branch");
-            Main.logger.info("responseBranches: " + responseBranches);
+            log.info("responseBranches: " + responseBranches);
             JsonReader reader = new JsonReader(new StringReader(responseBranches));
             BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
             for (Branch i : buildBranches.branches.branch) {
@@ -191,7 +192,7 @@ public class Builder extends Base {
                     i.name = i.name.replace("LKP - ", "");
                     x.setBranch(i);
                     localList.add(x);
-                    Main.logger.info("Project " + x.planKey.key + " has branch: " + i);
+                    log.info("Project " + x.planKey.key + " has branch: " + i);
                 }
             }
         }
@@ -200,7 +201,7 @@ public class Builder extends Base {
 
         for (Project x: allProjectsMap.get("EPZ")) {
             String responseBranches = getResponse2("https://ci-sel.dks.lanit.ru/rest/api/latest/plan/" + x.planKey.key + "/branch");
-            Main.logger.info("responseBranches: " + responseBranches);
+            log.info("responseBranches: " + responseBranches);
             JsonReader reader = new JsonReader(new StringReader(responseBranches));
             BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
             for (Branch i : buildBranches.branches.branch) {
@@ -209,7 +210,7 @@ public class Builder extends Base {
                     i.name = i.name.replace("Sphinx - ", "");
                     x.setBranch(i);
                     localList.add(x);
-                    Main.logger.info("Project " + x.planKey.key + " has branch: " + i);
+                    log.info("Project " + x.planKey.key + " has branch: " + i);
                 }
             }
         }
@@ -218,14 +219,14 @@ public class Builder extends Base {
 
         for (Project x: allProjectsMap.get("OTHER")) {
             String responseBranches = getResponse("https://ci-sel.dks.lanit.ru/rest/api/latest/plan/" + x.planKey.key + "/branch");
-            Main.logger.info("responseBranches: " + responseBranches);
+            log.info("responseBranches: " + responseBranches);
             JsonReader reader = new JsonReader(new StringReader(responseBranches));
             BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
             for (Branch i : buildBranches.branches.branch) {
                 if (i.shortName.equalsIgnoreCase(branchName)) {
                     x.setBranch(i);
                     localList.add(x);
-                    Main.logger.info("Project " + x.planKey.key + " has branch: " + i);
+                    log.info("Project " + x.planKey.key + " has branch: " + i);
                 }
             }
         }
@@ -242,7 +243,7 @@ public class Builder extends Base {
         String response1 = "";
         String credential = Credentials.basic(username, password);
         for (Project p: checkedProjectsMap) {
-            Main.logger.info("https://ci-sel.dks.lanit.ru/rest/api/latest/queue/" + p.branch.key);
+            log.info("https://ci-sel.dks.lanit.ru/rest/api/latest/queue/" + p.branch.key);
 //            response1 = "{\"planKey\":\"EIS-EISRDIKWF47\",\"buildNumber\":1,\"buildResultKey\":\"EIS-EISRDIKWF47-22\",\"triggerReason\":\"Manual build\",\"link\":{\"href\":\"https://ci-sel.dks.lanit.ru/rest/api/latest/result/EIS-EISRDIKWF47-1\",\"rel\":\"self\"}}";
             RequestBody body = RequestBody.create(null, new byte[0]);
             Request request = new Request.Builder()
@@ -259,14 +260,14 @@ public class Builder extends Base {
                 Response response = call.execute();
                 responseCode = response.code();
                 if (response.code() != 200) {
-                    Main.logger.info("BuildPlan " + p.branch.key + " didn't start");
+                    log.info("BuildPlan " + p.branch.key + " didn't start");
                     unStartedBuilds.add("https://ci-sel.dks.lanit.ru/browse/" + p.branch.key);
                     continue;
                 }
                 response1 = response.body().string();
-                Main.logger.info("response: " + response1);
+                log.info("response: " + response1);
             } catch (IOException e) {
-                Main.logger.info("Error");
+                log.info("Error");
                 e.printStackTrace();
                 httpClient.connectionPool().evictAll();
             }
@@ -277,7 +278,7 @@ public class Builder extends Base {
             p.setBuildResult(buildResult);
             startedProjectsList.add(p);
         }
-        Main.logger.info("startedProjects: " + startedProjectsList);
+        log.info("startedProjects: " + startedProjectsList);
     }
 
     /**
@@ -286,7 +287,7 @@ public class Builder extends Base {
     public void getBuildsResults() {
         for (Project p : startedProjectsList) {
             String responseResult = getResponse2(p.buildResult.link.href);
-            Main.logger.info("responseResult: " + responseResult);
+            log.info("responseResult: " + responseResult);
             Gson g = new Gson();
             JsonReader reader = new JsonReader(new StringReader(responseResult));
             BuildResultStatus buildResultStatus = g.fromJson(reader, BuildResultStatus.class);
@@ -301,7 +302,7 @@ public class Builder extends Base {
         /*Map<String, String> buildResults = new HashMap<>();
         for (String key : startedBuilds.keySet()) {
             String responseResult = getResponse2(startedBuilds.get(key));
-            Main.logger.info("responseResult: " + responseResult);
+            log.info("responseResult: " + responseResult);
             List<String> buildName = JsonPath
                     .parse(responseResult)
                     .read(".shortName");

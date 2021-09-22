@@ -5,7 +5,8 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import okhttp3.*;
-import sample.Main;
+import org.apache.log4j.Logger;
+import sample.Controller;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Класс с общими методами
  */
 public class Base {
+    private static final Logger log = Logger.getLogger(Controller.class);
 
     protected String username;
     protected String password;
@@ -53,7 +55,7 @@ public class Base {
             response1 = response.body().string();
             httpClient.connectionPool().evictAll();
         } catch (IOException e) {
-            Main.logger.info("" + e);
+            log.info("" + e);
             httpClient.connectionPool().evictAll();
         }
         return response1;

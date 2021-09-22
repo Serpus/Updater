@@ -2,12 +2,12 @@ package updater;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import org.apache.log4j.Logger;
 import parser.project.Environments;
 import parser.project.Project;
 import parser.project.deploys.DeploymentResult;
 import parser.project.deploys.DeploymentResultId;
 import parser.project.deploys.Version;
-import sample.Main;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DeployerOP extends Builder {
+    private static final Logger log = Logger.getLogger(DeployerOP.class);
 
     public DeployerOP(String username, String password) {
         super(username, password);
@@ -61,12 +62,12 @@ public class DeployerOP extends Builder {
             String json = "{\"planResultKey\":\"" + p.buildResult.buildResultKey + "\"," +
                     "\"name\":\"" + p.branch.shortName + "-" + p.buildResult.buildNumber + "-" + standNameShort + "\"," +
                     "\"nextVersionName\":\"" + p.branch.shortName + "-" + (p.buildResult.buildNumber + 1) + "-" + standNameShort + "\"}";
-            Main.logger.info("JSON: " + json);
+            log.info("JSON: " + json);
 //            String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/65404967/version";
             String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/" + p.currentEnvironment.deploymentProjectId + "/version";
-            Main.logger.info("request: " + request);
+            log.info("request: " + request);
             String response = base.getResponsePost(request, json);
-            Main.logger.info("response: " + response);
+            log.info("response: " + response);
             Gson g = new Gson();
             JsonReader reader = new JsonReader(new StringReader(response));
             Version version = g.fromJson(reader, Version.class);
@@ -98,22 +99,22 @@ public class DeployerOP extends Builder {
                     "https://ci-sel.dks.lanit.ru/rest/api/latest/queue/deployment?" +
                     "environmentId=" + p.currentEnvironment.id +
                     "&versionId=" + p.version[number].id;
-            Main.logger.info("url: " + url);
+            log.info("url: " + url);
             String response = base.getResponsePost(url, "");
             Gson g = new Gson();
             JsonReader reader = new JsonReader(new StringReader(response));
             DeploymentResultId deploymentResultId = g.fromJson(reader, DeploymentResultId.class);
             p.setDeploymentResultId(deploymentResultId, number);
-            Main.logger.info("deploymentResultId: " + deploymentResultId);
+            log.info("deploymentResultId: " + deploymentResultId);
         }
     }
 
     public void getDeployResult(final int number) {
-        Main.logger.info("Request number: " + number);
+        log.info("Request number: " + number);
         for (Project p : deployOpOnStands.get(number)) {
-            Main.logger.info("Project: " + p);
+            log.info("Project: " + p);
             String url = p.deploymentResultId[number].link.href;
-            Main.logger.info("url: " + url);
+            log.info("url: " + url);
             String response = getResponse2(url);
             Gson g = new Gson();
             JsonReader reader = new JsonReader(new StringReader(response));
