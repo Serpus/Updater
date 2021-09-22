@@ -74,6 +74,8 @@ public class Controller extends DeployController {
     @FXML
     private Tab deployTab;
     @FXML
+    private Tab deployTabOP;
+    @FXML
     private MenuButton branchMenu;
     @FXML
     private ListView<Label> statusListView;
@@ -96,6 +98,8 @@ public class Controller extends DeployController {
         if (isDeployTabDisable) {
             deployTab.setDisable(false);
             deployTab.setDisable(true);
+            deployTabOP.setDisable(false);
+            deployTabOP.setDisable(true);
             isDeployTabDisable = false;
         }
 
