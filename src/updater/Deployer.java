@@ -11,7 +11,6 @@ import parser.project.deploys.Version;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -73,7 +72,7 @@ public class Deployer extends Builder {
                 log.info("End of collection");
             }
         } catch (Exception e) {
-            log.info("" + Arrays.toString(e.getStackTrace()));
+            log.info("" + e);
         }
     }
 
