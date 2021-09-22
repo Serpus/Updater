@@ -67,6 +67,7 @@ public class Deployer extends Builder {
             Version version = g.fromJson(reader, Version.class);
             p.setVersion(version, number);
             deployOnStands.get(number).add(p);
+            Main.logger.info("End of collection");
         }
     }
 

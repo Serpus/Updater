@@ -654,7 +654,7 @@ public class Controller extends DeployController {
             }
         }
         int i = 0;
-        int standMenuSize =  deployStatusStandMenu.getItems().size();
+        int standMenuSize = deployStatusStandMenu.getItems().size();
         Main.logger.info("standMenuSize: " + standMenuSize);
         deployer.setDeployOnStands();
         for (MenuItem item : deployStatusStandMenu.getItems()) {
