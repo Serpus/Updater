@@ -73,6 +73,7 @@ public class Deployer extends Builder {
             }
         } catch (Exception e) {
             log.info("" + e);
+            throw e;
         }
     }
 
