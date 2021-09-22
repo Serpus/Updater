@@ -166,14 +166,18 @@ public class Controller extends DeployController {
         enterHint.setVisible(false);
         branchMenu.setDisable(false);
         deployTab.setDisable(true);
+        deployTabOP.setDisable(true);
         deployStatusStandMenu.setDisable(true);
         prepareDeployModal.setDisable(false);
         isDeploysStart = false;
+        isDeployTabDisable = true;
         disableRefreshButton();
         enableStands();
         clearDeployStatusStand();
         disableDeployStatusPanes();
         defaultVisibleDeployStatusPane();
+        clearDeployList();
+        deployer = new Deployer(username.getText(), password.getText());
         Main.logger.info("Cancel. Success cleaning data");
     }
 

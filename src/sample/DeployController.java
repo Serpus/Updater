@@ -245,4 +245,10 @@ public class DeployController extends DeployControllerOP {
         removeStand2.setVisible(true);
     }
 
+    protected void clearDeployList() {
+        statusDeploysListView1.getItems().clear();
+        statusDeploysListView2.getItems().clear();
+        statusDeploysListView3.getItems().clear();
+    }
+
 }
