@@ -887,23 +887,23 @@ public class Controller extends DeployController {
     public void showDeployModalEpzBd() {
         deployOpModal.setVisible(true);
         opProjectName.setText("Собранные билды ЕПЗ БД");
-        checkBoxListBuildsOP = new ArrayList<>();
+        radioGroupListBuildsOP = new ArrayList<>();
         ToggleGroup group = new ToggleGroup();
 
         int iteratorList = 0;
         int iterator = 0;
 
-        checkBoxListBuildsOP.add(new RadioButton("Успешные билды:"));
-        checkBoxListBuildsOP.get(0).setDisable(true);
-        checkBoxListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
-        checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
+        radioGroupListBuildsOP.add(new RadioButton("Успешные билды:"));
+        radioGroupListBuildsOP.get(0).setDisable(true);
+        radioGroupListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
+        checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
         for (Result r : deployerOP.getEpzBdBuildsResult(branch.getText())) {
-            checkBoxListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
-            checkBoxListBuildsOP.get(iteratorList).setToggleGroup(group);
-            checkBoxListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(checkBoxListBuildsOP));
-            checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
+            radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
+            radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
+            radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
+            checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
             iterator++;
             iteratorList++;
             }
@@ -922,7 +922,7 @@ public class Controller extends DeployController {
     public void cancelModalDeployOP() {
         deployOpModal.setVisible(false);
         opProjectName.setText("");
-        checkBoxListBuildsOP.clear();
+        radioGroupListBuildsOP.clear();
         checkboxTableDeploysOP.getChildren().removeAll();
         checkboxTableDeploysOP.getChildren().clear();
         log.info("Очищены данные в МО готовых билдов ОЧ");
