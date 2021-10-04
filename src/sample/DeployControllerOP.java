@@ -71,7 +71,7 @@ public class DeployControllerOP {
     @FXML
     protected ListView<Label> statusDeploysListView3op;
 
-    protected ArrayList<CheckBox> checkBoxListBuildsOP;
+    protected ArrayList<RadioButton> checkBoxListBuildsOP;
 
 
     public void setDeployStatusStandMenuOP() {

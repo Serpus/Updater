@@ -885,35 +885,27 @@ public class Controller extends DeployController {
 
 
     public void showDeployModalEpzBd() {
-        checkboxTableDeploysOP.getChildren().clear();
         deployOpModal.setVisible(true);
         opProjectName.setText("Собранные билды ЕПЗ БД");
         checkBoxListBuildsOP = new ArrayList<>();
+        ToggleGroup group = new ToggleGroup();
 
         int iteratorList = 0;
         int iterator = 0;
 
-        checkBoxListBuildsOP.add(new CheckBox("Успешные билды:"));
-        checkBoxListBuildsOP.get(0).setOnAction(event -> {
-            if (checkBoxListBuildsOP.get(0).isSelected())
-                for (CheckBox x : checkBoxListBuildsOP)
-                    x.setSelected(true);
-            else
-                for (CheckBox x : checkBoxListBuildsOP)
-                    x.setSelected(false);
-        });
-        checkBoxListBuildsOP.get(0).setSelected(true);
+        checkBoxListBuildsOP.add(new RadioButton("Успешные билды:"));
+        checkBoxListBuildsOP.get(0).setDisable(true);
         checkBoxListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
         checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
         for (Result r : deployerOP.getEpzBdBuildsResult(branch.getText())) {
-                checkBoxListBuildsOP.add(new CheckBox(r.plan.master.name + " - Build #" + r.buildNumber));
-                checkBoxListBuildsOP.get(iteratorList).setSelected(true);
-                checkBoxListBuildsOP.get(iteratorList).setOnAction(event -> checkOneCheckedBox(checkBoxListBuildsOP));
-                checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
-                iterator++;
-                iteratorList++;
+            checkBoxListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
+            checkBoxListBuildsOP.get(iteratorList).setToggleGroup(group);
+            checkBoxListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(checkBoxListBuildsOP));
+            checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
+            iterator++;
+            iteratorList++;
             }
     }
 
@@ -930,6 +922,10 @@ public class Controller extends DeployController {
     public void cancelModalDeployOP() {
         deployOpModal.setVisible(false);
         opProjectName.setText("");
+        checkBoxListBuildsOP.clear();
+        checkboxTableDeploysOP.getChildren().removeAll();
+        checkboxTableDeploysOP.getChildren().clear();
+        log.info("Очищены данные в МО готовых билдов ОЧ");
     }
 
     public void startDeployingOP() {

@@ -35,7 +35,7 @@ public class DeployerOP extends Builder {
         return buildsOpToDeploy;
     }
 
-    private List<Result> successBuildsInEpzBd = new ArrayList<>();
+    private List<Result> successBuildsInEpzBd;
     private List<Result> successBuildsInEpz = new ArrayList<>();
     private List<Result> successBuildsInSphinx = new ArrayList<>();
 
@@ -137,6 +137,7 @@ public class DeployerOP extends Builder {
      * @param branchName название ветки
      */
     public List<Result> getEpzBdBuildsResult(final String branchName) {
+        successBuildsInEpzBd = new ArrayList<>();
         String branchKey = getBranchKeyForBuildPlan("EPZ-EPZDATABASE", branchName);
         String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
         log.info("request: " + request);
