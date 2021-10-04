@@ -36,8 +36,8 @@ public class DeployerOP extends Builder {
     }
 
     private List<Result> successBuildsInEpzBd;
-    private List<Result> successBuildsInEpz = new ArrayList<>();
-    private List<Result> successBuildsInSphinx = new ArrayList<>();
+    private List<Result> successBuildsInEpz;
+    private List<Result> successBuildsInSphinx;
 
     private HashMap<Integer, List<Project>> deployOpOnStands = new HashMap<>();
     public HashMap<Integer, List<Project>> getDeployOpOnStands() {
@@ -159,7 +159,8 @@ public class DeployerOP extends Builder {
      *
      * @param branchName название ветки
      */
-    public void getEpzBuildsResult(final String branchName) {
+    public List<Result> getEpzBuildsResult(final String branchName) {
+        successBuildsInEpz = new ArrayList<>();
         String branchKey = getBranchKeyForBuildPlan("EPZ-EPZWF", branchName);
         String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
         log.info("request: " + request);
@@ -170,9 +171,10 @@ public class DeployerOP extends Builder {
         AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
         for (Result r : allResults.results.result) {
             if (r.buildState.equalsIgnoreCase("Successful")) {
-                successBuildsInEpzBd.add(r);
+                successBuildsInEpz.add(r);
             }
         }
+        return successBuildsInEpz;
     }
 
     /**
@@ -180,7 +182,8 @@ public class DeployerOP extends Builder {
      *
      * @param branchName название ветки
      */
-    public void getSphinxBuildsResult(final String branchName) {
+    public List<Result> getSphinxBuildsResult(final String branchName) {
+        successBuildsInSphinx = new ArrayList<>();
         String branchKey = getBranchKeyForBuildPlan("EPZ-SPHXEPZN", branchName);
         String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
         log.info("request: " + request);
@@ -191,9 +194,10 @@ public class DeployerOP extends Builder {
         AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
         for (Result r : allResults.results.result) {
             if (r.buildState.equalsIgnoreCase("Successful")) {
-                successBuildsInEpzBd.add(r);
+                successBuildsInSphinx.add(r);
             }
         }
+        return successBuildsInSphinx;
     }
 
     /**
