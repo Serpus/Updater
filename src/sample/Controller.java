@@ -573,12 +573,14 @@ public class Controller extends DeployController {
         }
     }
 
-    private void checkOneCheckedBox(final ArrayList<CheckBox> boxes) {
-        int size = boxes.size();
-        boxes.get(0).setSelected(false);
-        boxes.get(0).setDisable(true);
+    private void paintRadio(ArrayList<RadioButton> buttons) {
+        for (RadioButton b : buttons) {
+            if (!b.getText().contains("Successful")) {
+                b.setDisable(true);
+                b.setSelected(false);
+            }
+        }
     }
-
 
     /**
      * Показываем окно подготовки деплоев с актуальными успешными билдами
