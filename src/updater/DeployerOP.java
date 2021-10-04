@@ -5,6 +5,10 @@ import com.google.gson.stream.JsonReader;
 import org.apache.log4j.Logger;
 import parser.project.Environments;
 import parser.project.Project;
+import parser.project.branches.Branch;
+import parser.project.branches.BuildBranches;
+import parser.project.buildResult.allResultsInBranch.AllBuildResultInBranchKey;
+import parser.project.buildResult.allResultsInBranch.Result;
 import parser.project.deploys.DeploymentResult;
 import parser.project.deploys.DeploymentResultId;
 import parser.project.deploys.Version;
@@ -30,6 +34,10 @@ public class DeployerOP extends Builder {
     public List<Project> getBuildsOpToDeploy() {
         return buildsOpToDeploy;
     }
+
+    private List<Result> successBuildsInEpzBd = new ArrayList<>();
+    private List<Result> successBuildsInEpz = new ArrayList<>();
+    private List<Result> successBuildsInSphinx = new ArrayList<>();
 
     private HashMap<Integer, List<Project>> deployOpOnStands = new HashMap<>();
     public HashMap<Integer, List<Project>> getDeployOpOnStands() {
@@ -121,5 +129,92 @@ public class DeployerOP extends Builder {
             DeploymentResult deploymentResult = g.fromJson(reader, DeploymentResult.class);
             p.setDeploymentResult(deploymentResult);
         }
+    }
+
+    /**
+     * Получаем последние успешные билды DB (ЕПЗ БД)
+     *
+     * @param branchName название ветки
+     */
+    public List<Result> getEpzBdBuildsResult(final String branchName) {
+        String branchKey = getBranchKeyForBuildPlan("EPZ-EPZDATABASE", branchName);
+        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
+        log.info("request: " + request);
+        String response = base.getResponse2(request);
+        log.info("response: " + response);
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
+        for (Result r : allResults.results.result) {
+            if (r.buildState.equalsIgnoreCase("Successful")) {
+                successBuildsInEpzBd.add(r);
+            }
+        }
+        return successBuildsInEpzBd;
+    }
+
+    /**
+     * Получаем последние успешные билды EPZ (ЕПЗ)
+     *
+     * @param branchName название ветки
+     */
+    public void getEpzBuildsResult(final String branchName) {
+        String branchKey = getBranchKeyForBuildPlan("EPZ-EPZWF", branchName);
+        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
+        log.info("request: " + request);
+        String response = base.getResponse2(request);
+        log.info("response: " + response);
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
+        for (Result r : allResults.results.result) {
+            if (r.buildState.equalsIgnoreCase("Successful")) {
+                successBuildsInEpzBd.add(r);
+            }
+        }
+    }
+
+    /**
+     * Получаем последние успешные билды SPHINX-SERVER (Обновление Sphinx)
+     *
+     * @param branchName название ветки
+     */
+    public void getSphinxBuildsResult(final String branchName) {
+        String branchKey = getBranchKeyForBuildPlan("EPZ-SPHXEPZN", branchName);
+        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
+        log.info("request: " + request);
+        String response = base.getResponse2(request);
+        log.info("response: " + response);
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
+        for (Result r : allResults.results.result) {
+            if (r.buildState.equalsIgnoreCase("Successful")) {
+                successBuildsInEpzBd.add(r);
+            }
+        }
+    }
+
+    /**
+     * Получаем ключ для нужной ветки
+     *
+     * @return Возвращает ветку в формате {EPZ}-{buildPlanName}-{shortKey} при наличии
+     * или NULL при отсутствии такой ветки в проекте
+     */
+    private String getBranchKeyForBuildPlan(final String projectName, final String branchName) {
+        String request= "https://ci-sel.dks.lanit.ru/rest/api/latest/plan/" + projectName + "/branch";
+        log.info("request: " + request);
+        String response = base.getResponse2(request);
+        log.info("response: " + response);
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
+        for (Branch b : buildBranches.branches.branch) {
+            if (b.shortName.equalsIgnoreCase(branchName)) {
+                return b.key;
+            }
+        }
+        log.error("No such branches is project");
+        return null;
     }
 }

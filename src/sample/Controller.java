@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import org.apache.log4j.Logger;
 import parser.project.Project;
+import parser.project.buildResult.allResultsInBranch.Result;
 import updater.*;
 
 import java.awt.*;
@@ -572,6 +573,12 @@ public class Controller extends DeployController {
         }
     }
 
+    private void checkOneCheckedBox(final ArrayList<CheckBox> boxes) {
+        int size = boxes.size();
+        boxes.get(0).setSelected(false);
+        boxes.get(0).setDisable(true);
+    }
+
 
     /**
      * Показываем окно подготовки деплоев с актуальными успешными билдами
@@ -876,6 +883,7 @@ public class Controller extends DeployController {
 
 
     public void showDeployModalEpzBd() {
+        checkboxTableDeploysOP.getChildren().clear();
         deployOpModal.setVisible(true);
         opProjectName.setText("Собранные билды ЕПЗ БД");
         checkBoxListBuildsOP = new ArrayList<>();
@@ -897,18 +905,14 @@ public class Controller extends DeployController {
         checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
-        for (Project p : builder.getProjectsWithBranchesMap().get("EPZ")) {
-            if (p.buildResultStatus.buildState.equalsIgnoreCase("Successful")
-                    & !p.planKey.key.contains("EPZ")
-                    & !p.planKey.key.contains("SPHINX")) {
-                checkBoxListBuildsOP.add(new CheckBox(p.branch.name));
+        for (Result r : deployerOP.getEpzBdBuildsResult(branch.getText())) {
+                checkBoxListBuildsOP.add(new CheckBox(r.plan.master.name + " - Build #" + r.buildNumber));
                 checkBoxListBuildsOP.get(iteratorList).setSelected(true);
-                checkBoxListBuildsOP.get(iteratorList).setOnAction(event -> checkUncheckedBox(checkBoxListBuildsOP));
+                checkBoxListBuildsOP.get(iteratorList).setOnAction(event -> checkOneCheckedBox(checkBoxListBuildsOP));
                 checkboxTableDeploysOP.add(checkBoxListBuildsOP.get(iteratorList), 0, iterator);
                 iterator++;
                 iteratorList++;
             }
-        }
     }
 
     public void showDeployModalEpz() {
