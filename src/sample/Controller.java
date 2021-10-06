@@ -886,7 +886,13 @@ public class Controller extends DeployController {
 
 
 
-
+    public void someDeployOpSettings() {
+        int selected = 0;
+        for (RadioButton b : radioGroupListBuildsOP)
+        if (b.isSelected())
+            selected++;
+        confirmDeployOP.setDisable(selected == 0);
+    }
 
 
     public void showDeployModalEpzBd() {
