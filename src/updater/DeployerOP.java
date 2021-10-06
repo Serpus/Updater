@@ -132,72 +132,45 @@ public class DeployerOP extends Builder {
     }
 
     /**
-     * Получаем последние успешные билды DB (ЕПЗ БД)
+     * Сетим последние успешные билды для всех билдов ОЧ
      *
      * @param branchName название ветки
      */
-    public List<Result> getEpzBdBuildsResult(final String branchName) {
-        successBuildsInEpzBd = new ArrayList<>();
-        String branchKey = getBranchKeyForBuildPlan("EPZ-EPZDATABASE", branchName);
-        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
-        log.info("request: " + request);
-        String response = base.getResponse2(request);
-        log.info("response: " + response);
-        Gson g = new Gson();
-        JsonReader reader = new JsonReader(new StringReader(response));
-        AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
-        for (Result r : allResults.results.result) {
-            if (r.buildState.equalsIgnoreCase("Successful")) {
-                successBuildsInEpzBd.add(r);
+    public void setOpBuildsResult(final String branchName) {
+        log.info("Branch name: " + branchName);
+        for (Project p : opProjects) {
+            String branchKey = getBranchKeyForBuildPlan(p.planKey.key, branchName);
+            if (branchKey == null) {
+                log.error("Ключ ветки не найден. Не выполяем поиск билдов");
+                continue;
             }
+
+            String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey; // + "?max-results=5";
+            log.info("request: " + request);
+            String response = base.getResponse2(request);
+            log.info("response: " + response);
+            Gson g = new Gson();
+            JsonReader reader = new JsonReader(new StringReader(response));
+            AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
+            p.setResults(allResults.results);
         }
-        return successBuildsInEpzBd;
     }
 
     /**
-     * Получаем последние успешные билды EPZ (ЕПЗ)
+     * Получаем нужный билд план по ключу билда
      *
-     * @param branchName название ветки
+     * @param projectsList список проектов билдов, откуда будет делаться выборка
+     * @param projectName id билда из ссылки. <br/>
+     *                   К примеру: https://ci-sel.dks.lanit.ru/browse/<b>EPZ-EPZWF230</b>
+     * @return Возвращает нужный Project, либо null
      */
-    public List<Result> getEpzBuildsResult(final String branchName) {
-        successBuildsInEpz = new ArrayList<>();
-        String branchKey = getBranchKeyForBuildPlan("EPZ-EPZWF", branchName);
-        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
-        log.info("request: " + request);
-        String response = base.getResponse2(request);
-        log.info("response: " + response);
-        Gson g = new Gson();
-        JsonReader reader = new JsonReader(new StringReader(response));
-        AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
-        for (Result r : allResults.results.result) {
-            if (r.buildState.equalsIgnoreCase("Successful")) {
-                successBuildsInEpz.add(r);
-            }
+    public Project getProject(List<Project> projectsList, final String projectName) {
+        for (Project p : projectsList) {
+            if (p.planKey.key.equalsIgnoreCase(projectName))
+                return p;
         }
-        return successBuildsInEpz;
-    }
-
-    /**
-     * Получаем последние успешные билды SPHINX-SERVER (Обновление Sphinx)
-     *
-     * @param branchName название ветки
-     */
-    public List<Result> getSphinxBuildsResult(final String branchName) {
-        successBuildsInSphinx = new ArrayList<>();
-        String branchKey = getBranchKeyForBuildPlan("EPZ-SPHXEPZN", branchName);
-        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/result/" + branchKey + "?max-results=5";
-        log.info("request: " + request);
-        String response = base.getResponse2(request);
-        log.info("response: " + response);
-        Gson g = new Gson();
-        JsonReader reader = new JsonReader(new StringReader(response));
-        AllBuildResultInBranchKey allResults = g.fromJson(reader, AllBuildResultInBranchKey.class);
-        for (Result r : allResults.results.result) {
-            if (r.buildState.equalsIgnoreCase("Successful")) {
-                successBuildsInSphinx.add(r);
-            }
-        }
-        return successBuildsInSphinx;
+        log.error("Нужный проект не найден в списке билдов");
+        return null;
     }
 
     /**

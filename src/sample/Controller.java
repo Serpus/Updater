@@ -899,24 +899,85 @@ public class Controller extends DeployController {
         checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
-        for (Result r : deployerOP.getEpzBdBuildsResult(branch.getText())) {
+
+        deployerOP.setOpBuildsResult(branch.getText());
+        Project epzBdProject = deployerOP.getProject(deployerOP.getOpProjects(), "EPZ-EPZDATABASE");
+        if (epzBdProject.results == null || epzBdProject.results.result.length == 0) {
+            log.error("Отсутствуют успешные билды в билд плане " + epzBdProject.name + " в ветке " + branch.getText());
+            return;
+        }
+        for (Result r : epzBdProject.results.result) {
             radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
             radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
             radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
             checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
             iterator++;
             iteratorList++;
-            }
+        }
     }
 
     public void showDeployModalEpz() {
         deployOpModal.setVisible(true);
         opProjectName.setText("Собранные билды ЕПЗ");
+        radioGroupListBuildsOP = new ArrayList<>();
+        ToggleGroup group = new ToggleGroup();
+
+        int iteratorList = 0;
+        int iterator = 0;
+
+        radioGroupListBuildsOP.add(new RadioButton("Успешные билды:"));
+        radioGroupListBuildsOP.get(0).setDisable(true);
+        radioGroupListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
+        checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+        iterator++;
+        iteratorList++;
+
+        deployerOP.setOpBuildsResult(branch.getText());
+        Project epzProject = deployerOP.getProject(deployerOP.getOpProjects(), "EPZ-EPZWF");
+        if (epzProject.results == null || epzProject.results.result.length == 0) {
+            log.error("Отсутствуют успешные билды в билд плане " + epzProject.name + " в ветке " + branch.getText());
+            return;
+        }
+        for (Result r : epzProject.results.result) {
+            radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
+            radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
+            radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
+            checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+            iterator++;
+            iteratorList++;
+        }
     }
 
     public void showDeployModalSphinx() {
         deployOpModal.setVisible(true);
         opProjectName.setText("Собранные билды Sphinx");
+        radioGroupListBuildsOP = new ArrayList<>();
+        ToggleGroup group = new ToggleGroup();
+
+        int iteratorList = 0;
+        int iterator = 0;
+
+        radioGroupListBuildsOP.add(new RadioButton("Успешные билды:"));
+        radioGroupListBuildsOP.get(0).setDisable(true);
+        radioGroupListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
+        checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+        iterator++;
+        iteratorList++;
+
+        deployerOP.setOpBuildsResult(branch.getText());
+        Project sphinxProject = deployerOP.getProject(deployerOP.getOpProjects(), "EPZ-SPHXEPZN");
+        if (sphinxProject.results == null || sphinxProject.results.result.length == 0) {
+            log.error("Отсутствуют успешные билды в билд плане " + sphinxProject.name + " в ветке " + branch.getText());
+            return;
+        }
+        for (Result r : sphinxProject.results.result) {
+            radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
+            radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
+            radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
+            checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+            iterator++;
+            iteratorList++;
+        }
     }
 
     public void cancelModalDeployOP() {
