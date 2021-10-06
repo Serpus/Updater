@@ -121,6 +121,11 @@ public class Controller extends DeployController {
                 standName.getText().isEmpty()) & !isDeploysStart) {
             prepareDeployModal.setDisable(false);
         }
+
+        if (standNameOP.getText().equalsIgnoreCase("Выберите стенд") | standName.getText().isEmpty())
+            confirmStandsButton.setVisible(false);
+        else
+            confirmStandsButton.setVisible(true);
     }
     public void someAuthSettings() {
         if (!username.getText().isEmpty()) {

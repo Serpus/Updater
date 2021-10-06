@@ -75,6 +75,10 @@ public class DeployControllerOP {
     @FXML
     protected Button refreshDeploysButton3op;
     @FXML
+    protected Button confirmStandsButton;
+    @FXML
+    protected Button newStandsButton;
+    @FXML
     protected Button prepareEpzBd;
     @FXML
     protected Button prepareEpz;
@@ -199,102 +203,108 @@ public class DeployControllerOP {
         }
     }
 
-    public void disableStandsOP() {
+    private void disableAllStandsTab() {
+        Eis3OpTab.setDisable(true);
+        Eis4OpTab.setDisable(true);
+        Eis5OpTab.setDisable(true);
+        Eis6OpTab.setDisable(true);
+        Eis7OpTab.setDisable(true);
+    }
+
+    public void confirmStands() {
         standNameOP.setDisable(true);
         standName2op.setDisable(true);
         standName3op.setDisable(true);
+
         addStand2op.setDisable(true);
         addStand3op.setDisable(true);
         removeStand2op.setDisable(true);
         removeStand3op.setDisable(true);
+
+        prepareEpz.setDisable(false);
+        prepareEpzBd.setDisable(false);
+        prepareSphinx.setDisable(false);
+
+        newStandsButton.setVisible(true);
+        confirmStandsButton.setVisible(false);
+
+        enableStandTab(standNameOP.getText());
+        enableStandTab(standName2op.getText());
+        enableStandTab(standName3op.getText());
     }
 
-    public void enableStandsOP() {
+    public void newStands() {
+        resetTab();
+    }
+
+    public void resetTab() {
         standNameOP.setDisable(false);
         standName2op.setDisable(false);
         standName3op.setDisable(false);
+
         addStand2op.setDisable(false);
         addStand3op.setDisable(false);
         removeStand2op.setDisable(false);
         removeStand3op.setDisable(false);
+
+        prepareEpz.setDisable(true);
+        prepareEpzBd.setDisable(true);
+        prepareSphinx.setDisable(true);
+
+        newStandsButton.setVisible(false);
+        confirmStandsButton.setVisible(false);
+        standNameOP.setText("Выберите стенд");
+        standName2op.setText("Выберите стенд");
+        standName3op.setText("Выберите стенд");
+        disableAllStandsTab();
     }
 
     public void setEIS3op() {
-        disableStandTab(standNameOP.getText());
         standNameOP.setText("ЕИС-3");
-        enableStandTab(standNameOP.getText());
     }
     public void setEIS4op() {
-        disableStandTab(standNameOP.getText());
         standNameOP.setText("ЕИС-4");
-        enableStandTab(standNameOP.getText());
     }
     public void setEIS5op() {
-        disableStandTab(standNameOP.getText());
         standNameOP.setText("ЕИС-5");
-        enableStandTab(standNameOP.getText());
     }
     public void setEIS6op() {
-        disableStandTab(standNameOP.getText());
         standNameOP.setText("ЕИС-6");
-        enableStandTab(standNameOP.getText());
     }
     public void setEIS7op() {
-        disableStandTab(standNameOP.getText());
         standNameOP.setText("ЕИС-7");
-        enableStandTab(standNameOP.getText());
     }
 
     public void setEIS32op() {
-        disableStandTab(standName2op.getText());
         standName2op.setText("ЕИС-3");
-        enableStandTab(standName2op.getText());
     }
     public void setEIS42op() {
-        disableStandTab(standName2op.getText());
         standName2op.setText("ЕИС-4");
-        enableStandTab(standName2op.getText());
     }
     public void setEIS52op() {
-        disableStandTab(standName2op.getText());
         standName2op.setText("ЕИС-5");
-        enableStandTab(standName2op.getText());
     }
     public void setEIS62op() {
-        disableStandTab(standName2op.getText());
         standName2op.setText("ЕИС-6");
-        enableStandTab(standName2op.getText());
     }
     public void setEIS72op() {
-        disableStandTab(standName2op.getText());
         standName2op.setText("ЕИС-7");
-        enableStandTab(standName2op.getText());
     }
 
     public void setEIS33op() {
-        disableStandTab(standName3op.getText());
         standName3op.setText("ЕИС-3");
-        enableStandTab(standName3op.getText());
     }
     public void setEIS43op() {
-        disableStandTab(standName3op.getText());
         standName3op.setText("ЕИС-4");
-        enableStandTab(standName3op.getText());
     }
     public void setEIS53op() {
-        disableStandTab(standName3op.getText());
         standName3op.setText("ЕИС-5");
-        enableStandTab(standName3op.getText());
     }
     public void setEIS63op() {
-        disableStandTab(standName3op.getText());
         standName3op.setText("ЕИС-6");
-        enableStandTab(standName3op.getText());
     }
     public void setEIS73op() {
-        disableStandTab(standName3op.getText());
         standName3op.setText("ЕИС-7");
-        enableStandTab(standName3op.getText());
     }
 
     public void addStand2op() {
@@ -316,7 +326,6 @@ public class DeployControllerOP {
         removeStand2op.setVisible(false);
         addStand2op.setVisible(true);
         addStand3op.setVisible(false);
-        disableStandTab(standName2op.getText());
         standName2op.setText("Выберите стенд");
     }
 
@@ -325,7 +334,6 @@ public class DeployControllerOP {
         addStand3op.setVisible(true);
         removeStand3op.setVisible(false);
         removeStand2op.setVisible(true);
-        disableStandTab(standName3op.getText());
         standName3op.setText("Выберите стенд");
     }
 }

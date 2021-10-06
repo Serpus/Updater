@@ -239,45 +239,9 @@
                           <items>
                           </items>
                        </MenuButton>
-                        <Button fx:id="prepareEpzBd" layoutX="16.0" layoutY="190.0" mnemonicParsing="false" onAction="#showDeployModalEpzBd" text="Подготовить деплои ОЧ ЕПЗ БД" />
-                        <Button fx:id="prepareEpz" layoutX="25.0" layoutY="228.0" mnemonicParsing="false" onAction="#showDeployModalEpz" text="Подготовить деплои ОЧ ЕПЗ" />
-                        <Button fx:id="prepareSphinx" layoutX="28.0" layoutY="266.0" mnemonicParsing="false" onAction="#showDeployModalSphinx" text="Подготовить деплои Sphinx" />
-                        <DialogPane fx:id="deployOpModal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="769.0" visible="false">
-                           <header>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="24.0" prefWidth="600.0">
-                                 <children>
-                                    <Label layoutX="324.0" layoutY="7.0" text="Предупреждение" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                           </header>
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="339.0" prefWidth="600.0">
-                                 <children>
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="140.0" layoutY="54.0" prefHeight="342.0" prefWidth="488.0">
-                                       <content>
-                                          <GridPane fx:id="checkboxTableDeploysOP" prefHeight="46.0" prefWidth="479.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                       </content>
-                                    </ScrollPane>
-                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="220.0" layoutY="6.0" prefHeight="17.0" prefWidth="324.0" text="После подтверждения начнётся деплой билдов из списка" />
-                                    <Label fx:id="opProjectName" alignment="CENTER" contentDisplay="TOP" layoutX="250.0" layoutY="21.0" prefHeight="17.0" prefWidth="263.0" text="" textAlignment="CENTER" textFill="#029608" />
-                                    <Label layoutX="140.0" layoutY="34.0" text="Список успешных билдов:" />
-                                    <Button fx:id="cancelModalDeployOP" layoutX="304.0" layoutY="417.0" mnemonicParsing="false" onAction="#cancelModalDeployOP" text="Отмена" />
-                                    <Button fx:id="confirmDeployOP" layoutX="384.0" layoutY="417.0" mnemonicParsing="false" onAction="#startDeployingOP" text="Приступить к деплою" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </DialogPane>
+                        <Button fx:id="prepareEpzBd" disable="true" layoutX="16.0" layoutY="190.0" mnemonicParsing="false" onAction="#showDeployModalEpzBd" text="Подготовить деплои ОЧ ЕПЗ БД" />
+                        <Button fx:id="prepareEpz" disable="true" layoutX="25.0" layoutY="228.0" mnemonicParsing="false" onAction="#showDeployModalEpz" text="Подготовить деплои ОЧ ЕПЗ" />
+                        <Button fx:id="prepareSphinx" disable="true" layoutX="28.0" layoutY="266.0" mnemonicParsing="false" onAction="#showDeployModalSphinx" text="Подготовить деплои Sphinx" />
                         <TabPane layoutX="252.0" layoutY="3.0" prefHeight="495.0" prefWidth="512.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab fx:id="Eis3OpTab" closable="false" disable="true" text="ЕИС-3">
@@ -362,6 +326,44 @@
                              </Tab>
                           </tabs>
                         </TabPane>
+                        <Button fx:id="confirmStandsButton" layoutX="30.0" layoutY="148.0" mnemonicParsing="false" onAction="#confirmStands" text="Выбрать этот стенд/стенды" visible="false" />
+                        <Button fx:id="newStandsButton" layoutX="30.0" layoutY="148.0" mnemonicParsing="false" onAction="#newStands" prefHeight="25.0" prefWidth="166.0" text="Выбрать другие стенды" visible="false" />
+                        <DialogPane fx:id="deployOpModal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="769.0" visible="false">
+                           <header>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="24.0" prefWidth="600.0">
+                                 <children>
+                                    <Label layoutX="324.0" layoutY="7.0" text="Предупреждение" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </header>
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="339.0" prefWidth="600.0">
+                                 <children>
+                                    <ScrollPane hbarPolicy="NEVER" layoutX="140.0" layoutY="54.0" prefHeight="342.0" prefWidth="488.0">
+                                       <content>
+                                          <GridPane fx:id="checkboxTableDeploysOP" prefHeight="46.0" prefWidth="479.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="220.0" layoutY="6.0" prefHeight="17.0" prefWidth="324.0" text="После подтверждения начнётся деплой билдов из списка" />
+                                    <Label fx:id="opProjectName" alignment="CENTER" contentDisplay="TOP" layoutX="250.0" layoutY="21.0" prefHeight="17.0" prefWidth="263.0" text="" textAlignment="CENTER" textFill="#029608" />
+                                    <Label layoutX="140.0" layoutY="34.0" text="Список успешных билдов:" />
+                                    <Button fx:id="cancelModalDeployOP" layoutX="304.0" layoutY="417.0" mnemonicParsing="false" onAction="#cancelModalDeployOP" text="Отмена" />
+                                    <Button fx:id="confirmDeployOP" layoutX="384.0" layoutY="417.0" mnemonicParsing="false" onAction="#startDeployingOP" text="Приступить к деплою" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </DialogPane>
                     </children>
                  </AnchorPane>
               </content>
