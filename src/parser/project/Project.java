@@ -3,6 +3,7 @@ package parser.project;
 import parser.project.branches.Branch;
 import parser.project.buildResult.BuildResult;
 import parser.project.buildResult.BuildResultStatus;
+import parser.project.buildResult.allResultsInBranch.Results;
 import parser.project.deploys.DeploymentResult;
 import parser.project.deploys.DeploymentResultId;
 import parser.project.deploys.Version;
@@ -18,6 +19,7 @@ public class Project {
     public Branch branch;
     public BuildResult buildResult;
     public BuildResultStatus buildResultStatus;
+    public Results results;
     public Environments currentEnvironment;
     public Version[] version = new Version[3];
     public DeploymentResultId[] deploymentResultId = new DeploymentResultId[3];
@@ -34,6 +36,7 @@ public class Project {
                         "branch:" + branch + "\n" +
                         "buildResult:" + buildResult + "\n" +
                         "buildResultStatus:" + buildResultStatus + "\n" +
+                        "results:" + results + "\n" +
                         "currentEnvironment:" + currentEnvironment + "\n" +
                         "version:" + version + "\n" +
                         "deploymentResultId:" + deploymentResultId + "\n" +
@@ -51,6 +54,10 @@ public class Project {
 
     public void setBuildResultStatus(BuildResultStatus buildResultStatus) {
         this.buildResultStatus = buildResultStatus;
+    }
+
+    public void setResults(Results results) {
+        this.results = results;
     }
 
     public void setCurrentEnvironment(Environments environment) {
