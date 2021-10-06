@@ -1039,6 +1039,7 @@ public class Controller extends DeployController {
 
         setActivateStands();
         for (Stand stand : activeClassList) {
+            log.info("Текущий стенд: " + stand.getName());
             stand.setProject(selectedProject);
             deployerOP.createRelease(stand);
         }
