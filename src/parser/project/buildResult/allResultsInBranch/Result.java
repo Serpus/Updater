@@ -5,7 +5,7 @@ import parser.project.Link;
 public class Result {
     public Link link;
     public String buildResultKey;
-    public String buildNumber;
+    public int buildNumber;
     public String buildState;
     public PlanName plan;
 

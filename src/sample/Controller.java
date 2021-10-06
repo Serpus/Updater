@@ -15,6 +15,7 @@ import javafx.scene.paint.Paint;
 import org.apache.log4j.Logger;
 import parser.project.Project;
 import parser.project.buildResult.allResultsInBranch.Result;
+import stands.*;
 import updater.*;
 
 import java.awt.*;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Controller extends DeployController {
@@ -95,6 +97,12 @@ public class Controller extends DeployController {
     private ArrayList<CheckBox> checkBoxListOther;
     private boolean isDeployTabDisable = true;
     private boolean isDeploysStart = false;
+    private EIS3 eis3;
+    private EIS4 eis4;
+    private EIS5 eis5;
+    private EIS6 eis6;
+    private EIS7 eis7;
+    private List<Stand> activeClassList;
 
     public void someSettings() {
         // Вкладка деплоев после логина почему-то выглядит активной, если её заново не отключить
@@ -1001,7 +1009,78 @@ public class Controller extends DeployController {
     }
 
     public void startDeployingOP() {
+        RadioButton selectedRadio = new RadioButton();
+        for (RadioButton radio : radioGroupListBuildsOP) {
+            if (radio.isSelected()) {
+                selectedRadio = radio;
+            }
+        }
+        String radioText = selectedRadio.getText();
 
+        log.info("Selected radioButton is: " + radioText);
+
+        int buildNumber = Integer.parseInt(radioText.substring(radioText.indexOf("#") + 1, radioText.lastIndexOf(" -")));
+        log.info("Build number: " + buildNumber);
+
+        Project selectedProject = new Project();
+        for (Project p : deployerOP.getOpProjects()) {
+            if (p.results == null)
+                continue;
+            for (Result r : p.results.result) {
+                if (radioText.contains(r.plan.master.name) & r.plan.master.name.contains(p.name)) {
+                    selectedProject = p;
+                    break;
+                }
+            }
+        }
+        log.info("Selected Project is: " + selectedProject);
+
+        clearOtherResults(selectedProject, buildNumber);
+
+        setActivateStands();
+        for (Stand stand : activeClassList) {
+            stand.setProject(selectedProject);
+            deployerOP.createRelease(stand);
+        }
+    }
+
+    private void setActivateStands() {
+        activeClassList = new ArrayList<>();
+        for (String stand: getStandNamesList()) {
+            switch (stand) {
+                case ("ЕИС-3"):
+                    eis3 = new EIS3();
+                    activeClassList.add(eis3);
+                    break;
+                case ("ЕИС-4"):
+                    eis4 = new EIS4();
+                    activeClassList.add(eis4);
+                    break;
+                case ("ЕИС-5"):
+                    eis5 = new EIS5();
+                    activeClassList.add(eis5);
+                    break;
+                case ("ЕИС-6"):
+                    eis6 = new EIS6();
+                    activeClassList.add(eis6);
+                    break;
+                case ("ЕИС-7"):
+                    eis7 = new EIS7();
+                    activeClassList.add(eis7);
+                    break;
+            }
+        }
+    }
+
+    private void clearOtherResults(final Project project, final int buildNumber) {
+        Result temp;
+        for (Result r : project.results.result) {
+            if (r.buildNumber == buildNumber) {
+                temp = r;
+                project.results.result = null;
+                project.results.oneResult = temp;
+            }
+        }
     }
 
     public void refreshDeploysStatus1op() {

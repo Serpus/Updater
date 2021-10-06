@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DeployControllerOP {
     @FXML
@@ -257,6 +258,22 @@ public class DeployControllerOP {
         standName2op.setText("Выберите стенд");
         standName3op.setText("Выберите стенд");
         disableAllStandsTab();
+    }
+
+    public List<String> getStandNamesList() {
+        List<String> local = new ArrayList<>();
+        String standNameOPText = standNameOP.getText();
+        String standName2OPText = standName2op.getText();
+        String standName3OPText = standName3op.getText();
+
+        if (!(standNameOPText == null || standNameOPText.isEmpty()))
+            local.add(standNameOPText);
+        if (!(standName2OPText == null || standName2OPText.isEmpty()))
+            local.add(standName2OPText);
+        if (!(standName3OPText == null || standName3OPText.isEmpty()))
+            local.add(standName3OPText);
+
+        return local;
     }
 
     public void setEIS3op() {

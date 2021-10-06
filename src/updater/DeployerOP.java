@@ -12,6 +12,7 @@ import parser.project.buildResult.allResultsInBranch.Result;
 import parser.project.deploys.DeploymentResult;
 import parser.project.deploys.DeploymentResultId;
 import parser.project.deploys.Version;
+import stands.Stand;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -82,6 +83,36 @@ public class DeployerOP extends Builder {
             p.setVersion(version, number);
             deployOpOnStands.get(number).add(p);
         }
+    }
+
+    /**
+     * Делаем релиз
+     */
+    public void createRelease(Stand stand) {
+        Project project = stand.getProject();
+        String shortStand = stand.getName().replace("ЕИС-", "");
+        for (Environments e : project.environments) {
+            if (e.name.contains(shortStand)) {
+                project.setCurrentEnvironment(e);
+                break;
+            }
+        }
+        /* String json = "{'planResultKey':'EIS-EISRDIKWF40-14'," +
+                    "'name':'release-11.0.0-14'," +
+                    "'nextVersionName':'release-11.0.0-15'}";*/
+        String json = "{\"planResultKey\":\"" + project.results.oneResult.buildResultKey + "\"," +
+                "\"name\":\"" + project.results.oneResult.plan.shortName + "-" + project.results.oneResult.buildNumber + "-" + shortStand + "\"," +
+                "\"nextVersionName\":\"" + project.results.oneResult.plan.shortName + "-" + (project.results.oneResult.buildNumber + 1) + "-" + shortStand + "\"}";
+        log.info("JSON: " + json);
+//            String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/65404967/version";
+        String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/" + project.currentEnvironment.deploymentProjectId + "/version";
+        log.info("request: " + request);
+        /*String response = base.getResponsePost(request, json);
+        log.info("response: " + response);
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        Version version = g.fromJson(reader, Version.class);
+        project.setVersionOp(version);*/
     }
 
     /**

@@ -22,6 +22,7 @@ public class Project {
     public Results results;
     public Environments currentEnvironment;
     public Version[] version = new Version[3];
+    public Version versionOp = new Version();
     public DeploymentResultId[] deploymentResultId = new DeploymentResultId[3];
     public DeploymentResult deploymentResult;
 
@@ -62,6 +63,10 @@ public class Project {
 
     public void setCurrentEnvironment(Environments environment) {
         this.currentEnvironment = environment;
+    }
+
+    public void setVersionOp(Version version) {
+        this.versionOp = version;
     }
 
     public void setVersion(Version version, final int number) {
