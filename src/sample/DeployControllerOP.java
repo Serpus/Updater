@@ -317,6 +317,7 @@ public class DeployControllerOP {
         addStand2op.setVisible(true);
         addStand3op.setVisible(false);
         disableStandTab(standName2op.getText());
+        standName2op.setText("Выберите стенд");
     }
 
     public void removeStand3op() {
@@ -325,5 +326,6 @@ public class DeployControllerOP {
         removeStand3op.setVisible(false);
         removeStand2op.setVisible(true);
         disableStandTab(standName3op.getText());
+        standName3op.setText("Выберите стенд");
     }
 }
