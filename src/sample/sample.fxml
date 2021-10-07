@@ -355,9 +355,9 @@
                                           </GridPane>
                                        </content>
                                     </ScrollPane>
-                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="220.0" layoutY="6.0" prefHeight="17.0" prefWidth="324.0" text="После подтверждения начнётся деплой билдов из списка" />
+                                    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="191.0" layoutY="6.0" prefHeight="17.0" prefWidth="386.0" text="После подтверждения начнётся деплой выбранного из списка билда" />
                                     <Label fx:id="opProjectName" alignment="CENTER" contentDisplay="TOP" layoutX="250.0" layoutY="21.0" prefHeight="17.0" prefWidth="263.0" text="" textAlignment="CENTER" textFill="#029608" />
-                                    <Label layoutX="140.0" layoutY="34.0" text="Список успешных билдов:" />
+                                    <Label layoutX="140.0" layoutY="34.0" text="Список последних билдов:" />
                                     <Button fx:id="cancelModalDeployOP" layoutX="304.0" layoutY="417.0" mnemonicParsing="false" onAction="#cancelModalDeployOP" text="Отмена" />
                                     <Button fx:id="confirmDeployOP" layoutX="384.0" layoutY="417.0" mnemonicParsing="false" onAction="#startDeployingOP" text="Приступить к деплою" />
                                  </children>
