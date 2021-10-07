@@ -70,11 +70,16 @@ public class DeployControllerOP {
     protected Button openAllDeploysEis7Op;
 
     @FXML
-    protected Button refreshDeploysButton1op;
+    protected Button refreshDeploysButtonEis3Op;
     @FXML
-    protected Button refreshDeploysButton2op;
+    protected Button refreshDeploysButtonEis4Op;
     @FXML
-    protected Button refreshDeploysButton3op;
+    protected Button refreshDeploysButtonEis5Op;
+    @FXML
+    protected Button refreshDeploysButtonEis6Op;
+    @FXML
+    protected Button refreshDeploysButtonEis7Op;
+
     @FXML
     protected Button confirmStandsButton;
     @FXML
@@ -207,6 +212,52 @@ public class DeployControllerOP {
                 Eis7OpTab.setDisable(true);
                 break;
         }
+    }
+
+    /**
+     * Активируем форму статусов деплоев
+     */
+    public void enableStatusDeploysPanes() {
+        statusDeploysPaneEis3Op.setDisable(false);
+        statusDeploysPaneEis4Op.setDisable(false);
+        statusDeploysPaneEis5Op.setDisable(false);
+        statusDeploysPaneEis6Op.setDisable(false);
+        statusDeploysPaneEis7Op.setDisable(false);
+
+        refreshDeploysButtonEis3Op.setDisable(false);
+        refreshDeploysButtonEis4Op.setDisable(false);
+        refreshDeploysButtonEis5Op.setDisable(false);
+        refreshDeploysButtonEis6Op.setDisable(false);
+        refreshDeploysButtonEis7Op.setDisable(false);
+
+        openAllDeploysEis3Op.setDisable(false);
+        openAllDeploysEis4Op.setDisable(false);
+        openAllDeploysEis5Op.setDisable(false);
+        openAllDeploysEis6Op.setDisable(false);
+        openAllDeploysEis7Op.setDisable(false);
+    }
+
+    /**
+     * Отключаем форму статусов деплоев
+     */
+    public void disableStatusDeploysPanes() {
+        statusDeploysPaneEis3Op.setDisable(true);
+        statusDeploysPaneEis4Op.setDisable(true);
+        statusDeploysPaneEis5Op.setDisable(true);
+        statusDeploysPaneEis6Op.setDisable(true);
+        statusDeploysPaneEis7Op.setDisable(true);
+
+        refreshDeploysButtonEis3Op.setDisable(true);
+        refreshDeploysButtonEis4Op.setDisable(true);
+        refreshDeploysButtonEis5Op.setDisable(true);
+        refreshDeploysButtonEis6Op.setDisable(true);
+        refreshDeploysButtonEis7Op.setDisable(true);
+
+        openAllDeploysEis3Op.setDisable(true);
+        openAllDeploysEis4Op.setDisable(true);
+        openAllDeploysEis5Op.setDisable(true);
+        openAllDeploysEis6Op.setDisable(true);
+        openAllDeploysEis7Op.setDisable(true);
     }
 
     private void disableAllStandsTab() {

@@ -251,7 +251,7 @@
                                          <Pane fx:id="statusDeploysPaneEis3Op" disable="true" prefHeight="506.0" prefWidth="504.0">
                                             <children>
                                                <Label layoutX="19.0" text="Статусы запущенных деплоев" />
-                                               <Button fx:id="refreshDeploysButtonEis3Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatus1op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
+                                               <Button fx:id="refreshDeploysButtonEis3Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatusEis3Op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
                                                <ListView fx:id="statusDeploysListViewEis3Op" fixedCellSize="0.0" layoutX="9.0" layoutY="31.0" prefHeight="428.0" prefWidth="488.0" />
                                                <Button fx:id="openAllDeploysEis3Op" disable="true" layoutX="293.0" layoutY="3.0" mnemonicParsing="false" onAction="#openAllDeploys1op" prefHeight="25.0" prefWidth="181.0" text="Открыть все деплои в списке" />
                                                <Label fx:id="deployStatusStandLabelEis3Op" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="15.0" prefHeight="17.0" prefWidth="167.0" text="ЕИС-3" textAlignment="CENTER" />
@@ -267,7 +267,7 @@
                                        <Pane fx:id="statusDeploysPaneEis4Op" disable="true" prefHeight="506.0" prefWidth="504.0">
                                           <children>
                                              <Label layoutX="19.0" text="Статусы запущенных деплоев" />
-                                             <Button fx:id="refreshDeploysButtonEis4Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatus1op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
+                                             <Button fx:id="refreshDeploysButtonEis4Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatusEis4Op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
                                              <ListView fx:id="statusDeploysListViewEis4Op" fixedCellSize="0.0" layoutX="9.0" layoutY="31.0" prefHeight="428.0" prefWidth="488.0" />
                                              <Button fx:id="openAllDeploysEis4Op" disable="true" layoutX="293.0" layoutY="3.0" mnemonicParsing="false" onAction="#openAllDeploys1op" prefHeight="25.0" prefWidth="181.0" text="Открыть все деплои в списке" />
                                              <Label fx:id="deployStatusStandLabelEis4Op" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="15.0" prefHeight="17.0" prefWidth="167.0" text="ЕИС-4" textAlignment="CENTER" />
@@ -283,7 +283,7 @@
                                          <Pane fx:id="statusDeploysPaneEis5Op" disable="true" prefHeight="506.0" prefWidth="504.0">
                                             <children>
                                                <Label layoutX="19.0" text="Статусы запущенных деплоев" />
-                                               <Button fx:id="refreshDeploysButtonEis5Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatus1op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
+                                               <Button fx:id="refreshDeploysButtonEis5Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatusEis5Op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
                                                <ListView fx:id="statusDeploysListViewEis5Op" fixedCellSize="0.0" layoutX="9.0" layoutY="31.0" prefHeight="428.0" prefWidth="488.0" />
                                                <Button fx:id="openAllDeploysEis5Op" disable="true" layoutX="293.0" layoutY="3.0" mnemonicParsing="false" onAction="#openAllDeploys1op" prefHeight="25.0" prefWidth="181.0" text="Открыть все деплои в списке" />
                                                <Label fx:id="deployStatusStandLabelEis5Op" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="15.0" prefHeight="17.0" prefWidth="167.0" text="ЕИС-5" textAlignment="CENTER" />
@@ -299,7 +299,7 @@
                                          <Pane fx:id="statusDeploysPaneEis6Op" disable="true" prefHeight="506.0" prefWidth="504.0">
                                             <children>
                                                <Label layoutX="19.0" text="Статусы запущенных деплоев" />
-                                               <Button fx:id="refreshDeploysButtonEis6Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatus1op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
+                                               <Button fx:id="refreshDeploysButtonEis6Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatusEis6Op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
                                                <ListView fx:id="statusDeploysListViewEis6Op" fixedCellSize="0.0" layoutX="9.0" layoutY="31.0" prefHeight="428.0" prefWidth="488.0" />
                                                <Button fx:id="openAllDeploysEis6Op" disable="true" layoutX="293.0" layoutY="3.0" mnemonicParsing="false" onAction="#openAllDeploys1op" prefHeight="25.0" prefWidth="181.0" text="Открыть все деплои в списке" />
                                                <Label fx:id="deployStatusStandLabelEis6Op" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="15.0" prefHeight="17.0" prefWidth="167.0" text="ЕИС-6" textAlignment="CENTER" />
@@ -315,7 +315,7 @@
                                          <Pane fx:id="statusDeploysPaneEis7Op" disable="true" prefHeight="506.0" prefWidth="504.0">
                                             <children>
                                                <Label layoutX="19.0" text="Статусы запущенных деплоев" />
-                                               <Button fx:id="refreshDeploysButtonEis7Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatus1op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
+                                               <Button fx:id="refreshDeploysButtonEis7Op" disable="true" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshDeploysStatusEis7Op" prefHeight="21.0" prefWidth="77.0" text="Обновить" />
                                                <ListView fx:id="statusDeploysListViewEis7Op" fixedCellSize="0.0" layoutX="9.0" layoutY="31.0" prefHeight="428.0" prefWidth="488.0" />
                                                <Button fx:id="openAllDeploysEis7Op" disable="true" layoutX="293.0" layoutY="3.0" mnemonicParsing="false" onAction="#openAllDeploys1op" prefHeight="25.0" prefWidth="181.0" text="Открыть все деплои в списке" />
                                                <Label fx:id="deployStatusStandLabelEis7Op" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="15.0" prefHeight="17.0" prefWidth="167.0" text="ЕИС-7" textAlignment="CENTER" />
@@ -328,7 +328,7 @@
                         </TabPane>
                         <Button fx:id="confirmStandsButton" layoutX="30.0" layoutY="148.0" mnemonicParsing="false" onAction="#confirmStands" text="Выбрать этот стенд/стенды" visible="false" />
                         <Button fx:id="newStandsButton" layoutX="30.0" layoutY="148.0" mnemonicParsing="false" onAction="#newStands" prefHeight="25.0" prefWidth="166.0" text="Выбрать другие стенды" visible="false" />
-                        <DialogPane onMouseMoved="#someDeployOpModalSettings" fx:id="deployOpModal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="769.0" visible="false">
+                        <DialogPane fx:id="deployOpModal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#someDeployOpModalSettings" prefHeight="507.0" prefWidth="769.0" visible="false">
                            <header>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="24.0" prefWidth="600.0">
                                  <children>
@@ -345,7 +345,7 @@
                                  <children>
                                     <ScrollPane hbarPolicy="NEVER" layoutX="140.0" layoutY="54.0" prefHeight="342.0" prefWidth="488.0">
                                        <content>
-                                          <GridPane fx:id="checkboxTableDeploysOP" prefHeight="46.0" prefWidth="479.0">
+                                          <GridPane fx:id="gridPaneTableDeploysOP" prefHeight="46.0" prefWidth="479.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
