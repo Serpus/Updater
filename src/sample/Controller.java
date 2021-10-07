@@ -894,7 +894,7 @@ public class Controller extends DeployController {
 
 
 
-    public void someDeployOpSettings() {
+    public void someDeployOpModalSettings() {
         int selected = 0;
         for (RadioButton b : radioGroupListBuildsOP)
         if (b.isSelected())
