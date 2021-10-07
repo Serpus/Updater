@@ -24,6 +24,7 @@ public class Project {
     public Version[] version = new Version[3];
     public Version versionOp = new Version();
     public DeploymentResultId[] deploymentResultId = new DeploymentResultId[3];
+    public DeploymentResultId deploymentResultIdOp = new DeploymentResultId();
     public DeploymentResult deploymentResult;
 
     @Override
@@ -75,6 +76,10 @@ public class Project {
 
     public void setDeploymentResultId(DeploymentResultId deploymentResultId, final int number) {
         this.deploymentResultId[number] = deploymentResultId;
+    }
+
+    public void setDeploymentResultIdOp(DeploymentResultId deploymentResultId) {
+        this.deploymentResultIdOp = deploymentResultId;
     }
 
     public void setDeploymentResult(DeploymentResult deploymentResult) {

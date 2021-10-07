@@ -106,7 +106,7 @@ public class DeployerOP extends Builder {
         log.info("JSON: " + json);
 //            String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/65404967/version";
         String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/" + project.currentEnvironment.deploymentProjectId + "/version";
-        log.info("request: " + request);
+        log.info("request release: " + request);
         /*String response = base.getResponsePost(request, json);
         log.info("response: " + response);
         Gson g = new Gson();
@@ -146,6 +146,24 @@ public class DeployerOP extends Builder {
             p.setDeploymentResultId(deploymentResultId, number);
             log.info("deploymentResultId: " + deploymentResultId);
         }
+    }
+
+    /**
+     * Деплоим билд-план на стенд
+     */
+    public void deploy(Stand stand) {
+        Project p = stand.getProject();
+        String url =
+                "https://ci-sel.dks.lanit.ru/rest/api/latest/queue/deployment?" +
+                        "environmentId=" + p.currentEnvironment.id +
+                        "&versionId=" + p.versionOp.id;
+        log.info("request deploy: " + url);
+        /*String response = base.getResponsePost(url, "");
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        DeploymentResultId deploymentResultId = g.fromJson(reader, DeploymentResultId.class);
+        p.setDeploymentResultIdOp(deploymentResultId);
+        log.info("deploymentResultId: " + deploymentResultId);*/
     }
 
     public void getDeployResult(final int number) {

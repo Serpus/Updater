@@ -1042,6 +1042,7 @@ public class Controller extends DeployController {
             log.info("Текущий стенд: " + stand.getName());
             stand.setProject(selectedProject);
             deployerOP.createRelease(stand);
+            deployerOP.deploy(stand);
         }
     }
 
