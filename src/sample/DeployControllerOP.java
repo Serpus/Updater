@@ -132,12 +132,17 @@ public class DeployControllerOP {
 
     @FXML
     protected Label opProjectName;
+
     @FXML
-    protected ListView<Label> statusDeploysListView1op;
+    protected ListView<Label> statusDeploysListViewEis3Op;
     @FXML
-    protected ListView<Label> statusDeploysListView2op;
+    protected ListView<Label> statusDeploysListViewEis4Op;
     @FXML
-    protected ListView<Label> statusDeploysListView3op;
+    protected ListView<Label> statusDeploysListViewEis5Op;
+    @FXML
+    protected ListView<Label> statusDeploysListViewEis6Op;
+    @FXML
+    protected ListView<Label> statusDeploysListViewEis7Op;
 
     protected ArrayList<RadioButton> radioGroupListBuildsOP;
 

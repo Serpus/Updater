@@ -4,7 +4,7 @@ import parser.project.Project;
 
 public class EIS3 extends Stand {
     private boolean isActive;
-    private Project project;
+    private Project projectOp;
 
     public EIS3() {
         isActive = true;
@@ -16,13 +16,13 @@ public class EIS3 extends Stand {
     }
 
     @Override
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectOp(Project projectOp) {
+        this.projectOp = projectOp;
     }
 
     @Override
-    public Project getProject() {
-        return project;
+    public Project getProjectOp() {
+        return projectOp;
     }
 
     @Override

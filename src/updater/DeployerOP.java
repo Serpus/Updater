@@ -89,7 +89,7 @@ public class DeployerOP extends Builder {
      * Делаем релиз
      */
     public void createRelease(Stand stand) {
-        Project project = stand.getProject();
+        Project project = stand.getProjectOp();
         String shortStand = stand.getName().replace("ЕИС-", "");
         for (Environments e : project.environments) {
             if (e.name.contains(shortStand)) {
@@ -152,7 +152,7 @@ public class DeployerOP extends Builder {
      * Деплоим билд-план на стенд
      */
     public void deploy(Stand stand) {
-        Project p = stand.getProject();
+        Project p = stand.getProjectOp();
         String url =
                 "https://ci-sel.dks.lanit.ru/rest/api/latest/queue/deployment?" +
                         "environmentId=" + p.currentEnvironment.id +
@@ -166,18 +166,17 @@ public class DeployerOP extends Builder {
         log.info("deploymentResultId: " + deploymentResultId);*/
     }
 
-    public void getDeployResult(final int number) {
-        log.info("Request number: " + number);
-        for (Project p : deployOpOnStands.get(number)) {
-            log.info("Project: " + p);
-            String url = p.deploymentResultId[number].link.href;
-            log.info("url: " + url);
-            String response = getResponse2(url);
-            Gson g = new Gson();
-            JsonReader reader = new JsonReader(new StringReader(response));
-            DeploymentResult deploymentResult = g.fromJson(reader, DeploymentResult.class);
-            p.setDeploymentResult(deploymentResult);
-        }
+    public void getDeployResult(Stand stand) {
+        Project p = stand.getProjectOp();
+        log.info("Project: " + p);
+        String url = p.deploymentResultIdOp.link.href;
+        log.info("response deploy result: " + url);
+        String response = getResponse2(url);
+        Gson g = new Gson();
+        JsonReader reader = new JsonReader(new StringReader(response));
+        DeploymentResult deploymentResult = g.fromJson(reader, DeploymentResult.class);
+        log.info("deploymentResult: " + deploymentResult);
+        p.setDeploymentResult(deploymentResult);
     }
 
     /**

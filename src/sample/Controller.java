@@ -1040,7 +1040,7 @@ public class Controller extends DeployController {
         setActivateStands();
         for (Stand stand : activeClassList) {
             log.info("Текущий стенд: " + stand.getName());
-            stand.setProject(selectedProject);
+            stand.setProjectOp(selectedProject);
             deployerOP.createRelease(stand);
             deployerOP.deploy(stand);
         }
@@ -1085,37 +1085,98 @@ public class Controller extends DeployController {
         }
     }
 
-    public void refreshDeploysStatus1op() {
-        // Переделать под ОЧ
-        /*setStatusDeploysListView1();
-        deployer.getDeployResult(1);
-        int i = 0;
-        for (Project p : deployer.getDeployOnStands().get(1)) {
-            String deploymentState = p.deploymentResult.deploymentState;
-            String lifeCycleState = p.deploymentResult.lifeCycleState;
-            if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
-                statusDeploysListView1.getItems().add(new Label());
-                statusDeploysListView1.getItems().get(i).setText(p.branch.name + " = В процессе или очереди\n" +
-                        createUrlForDeploy(p.deploymentResultId[1].deploymentResultId));
-                i++;
-            }
-            if (deploymentState.equalsIgnoreCase("SUCCESS")) {
-                statusDeploysListView1.getItems().add(new Label());
-                statusDeploysListView1.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
-                        createUrlForDeploy(p.deploymentResultId[1].deploymentResultId));
-                statusDeploysListView1.getItems().get(i).setTextFill(Paint.valueOf("Green"));
-                i++;
-            }
-            if (deploymentState.equalsIgnoreCase("FAILED")) {
-                statusDeploysListView1.getItems().add(new Label());
-                statusDeploysListView1.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
-                        createUrlForDeploy(p.deploymentResultId[1].deploymentResultId));
-                statusDeploysListView1.getItems().get(i).setTextFill(Paint.valueOf("Red"));
-                i++;
-            }
+    public void setStatusDeploysListViewOp(Stand stand) {
+        switch (stand.getName()) {
+            case ("ЕИС-3"):
+                statusDeploysListViewEis3Op.getItems().clear();
+                statusDeploysListViewEis3Op.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        String labelText = statusDeploysListViewEis3Op.getSelectionModel().getSelectedItem().getText();
+                        String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+                        log.info("URL: " + url);
+                        goToUrl(url);
+                    }
+                });
+                break;
+            case ("ЕИС-4"):
+                statusDeploysListViewEis4Op.getItems().clear();
+                statusDeploysListViewEis4Op.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        String labelText = statusDeploysListViewEis4Op.getSelectionModel().getSelectedItem().getText();
+                        String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+                        log.info("URL: " + url);
+                        goToUrl(url);
+                    }
+                });
+                break;
+            case ("ЕИС-5"):
+                statusDeploysListViewEis5Op.getItems().clear();
+                statusDeploysListViewEis5Op.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        String labelText = statusDeploysListViewEis5Op.getSelectionModel().getSelectedItem().getText();
+                        String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+                        log.info("URL: " + url);
+                        goToUrl(url);
+                    }
+                });
+                break;
+            case ("ЕИС-6"):
+                statusDeploysListViewEis6Op.getItems().clear();
+                statusDeploysListViewEis6Op.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        String labelText = statusDeploysListViewEis6Op.getSelectionModel().getSelectedItem().getText();
+                        String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+                        log.info("URL: " + url);
+                        goToUrl(url);
+                    }
+                });
+                break;
+            case ("ЕИС-7"):
+                statusDeploysListViewEis7Op.getItems().clear();
+                statusDeploysListViewEis7Op.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        String labelText = statusDeploysListViewEis7Op.getSelectionModel().getSelectedItem().getText();
+                        String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+                        log.info("URL: " + url);
+                        goToUrl(url);
+                    }
+                });
+                break;
         }
-        log.info("statusDeploysListView1: " + statusDeploysListView1.getItems());
-        openAllDeploys1.setDisable(statusDeploysListView1.getItems().size() <= 0);*/
+
+    }
+
+    public void refreshDeploysStatusEis3Op() {
+        setStatusDeploysListViewOp(eis3);
+        deployerOP.getDeployResult(eis3);
+        Project p = eis3.getProjectOp();
+
+        int i = 0;
+
+        String deploymentState = p.deploymentResult.deploymentState;
+        String lifeCycleState = p.deploymentResult.lifeCycleState;
+
+        if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
+            statusDeploysListViewEis3Op.getItems().add(new Label());
+            statusDeploysListViewEis3Op.getItems().get(i).setText(p.branch.name + " = В процессе или очереди\n" +
+                    createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
+            i++;
+        }
+        if (deploymentState.equalsIgnoreCase("SUCCESS")) {
+            statusDeploysListViewEis3Op.getItems().add(new Label());
+            statusDeploysListViewEis3Op.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                    createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
+            statusDeploysListViewEis3Op.getItems().get(i).setTextFill(Paint.valueOf("Green"));
+            i++;
+        }
+        if (deploymentState.equalsIgnoreCase("FAILED")) {
+            statusDeploysListViewEis3Op.getItems().add(new Label());
+            statusDeploysListViewEis3Op.getItems().get(i).setText(p.branch.name + " = " + deploymentState + "\n" +
+                    createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
+            statusDeploysListViewEis3Op.getItems().get(i).setTextFill(Paint.valueOf("Red"));
+        }
+        log.info("statusDeploysListView1: " + statusDeploysListViewEis3Op.getItems());
+        openAllDeploys1.setDisable(statusDeploysListViewEis3Op.getItems().size() <= 0);
     }
     public void refreshDeploysStatus2op() {
         // Переделать под ОЧ
@@ -1186,7 +1247,7 @@ public class Controller extends DeployController {
     /**
      * Открываем все билды
      */
-    public void openAllDeploys1op() {
+    /*public void openAllDeploys1op() {
         for (Label i : statusDeploysListView1op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
@@ -1211,5 +1272,5 @@ public class Controller extends DeployController {
             log.info("URL: " + url);
             goToUrl(url);
         }
-    }
+    }*/
 }
