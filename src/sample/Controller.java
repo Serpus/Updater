@@ -915,7 +915,7 @@ public class Controller extends DeployController {
         radioGroupListBuildsOP.add(new RadioButton("Успешные билды:"));
         radioGroupListBuildsOP.get(0).setDisable(true);
         radioGroupListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
-        checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+        gridPaneTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
 
@@ -929,7 +929,7 @@ public class Controller extends DeployController {
             radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
             radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
             radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
-            checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+            gridPaneTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
             iterator++;
             iteratorList++;
         }
@@ -947,7 +947,7 @@ public class Controller extends DeployController {
         radioGroupListBuildsOP.add(new RadioButton("Успешные билды:"));
         radioGroupListBuildsOP.get(0).setDisable(true);
         radioGroupListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
-        checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+        gridPaneTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
 
@@ -961,7 +961,7 @@ public class Controller extends DeployController {
             radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
             radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
             radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
-            checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+            gridPaneTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
             iterator++;
             iteratorList++;
         }
@@ -979,7 +979,7 @@ public class Controller extends DeployController {
         radioGroupListBuildsOP.add(new RadioButton("Успешные билды:"));
         radioGroupListBuildsOP.get(0).setDisable(true);
         radioGroupListBuildsOP.get(0).setStyle("-fx-font-weight: bold");
-        checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+        gridPaneTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
         iterator++;
         iteratorList++;
 
@@ -993,7 +993,7 @@ public class Controller extends DeployController {
             radioGroupListBuildsOP.add(new RadioButton(r.plan.master.name + " #" + r.buildNumber + " - " + r.buildState));
             radioGroupListBuildsOP.get(iteratorList).setToggleGroup(group);
             radioGroupListBuildsOP.get(iteratorList).setOnMouseMoved(event -> paintRadio(radioGroupListBuildsOP));
-            checkboxTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
+            gridPaneTableDeploysOP.add(radioGroupListBuildsOP.get(iteratorList), 0, iterator);
             iterator++;
             iteratorList++;
         }
@@ -1003,8 +1003,8 @@ public class Controller extends DeployController {
         deployOpModal.setVisible(false);
         opProjectName.setText("");
         radioGroupListBuildsOP.clear();
-        checkboxTableDeploysOP.getChildren().removeAll();
-        checkboxTableDeploysOP.getChildren().clear();
+        gridPaneTableDeploysOP.getChildren().removeAll();
+        gridPaneTableDeploysOP.getChildren().clear();
         log.info("Очищены данные в МО готовых билдов ОЧ");
     }
 

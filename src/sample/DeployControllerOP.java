@@ -92,7 +92,7 @@ public class DeployControllerOP {
     @FXML
     protected DialogPane deployOpModal;
     @FXML
-    protected GridPane checkboxTableDeploysOP;
+    protected GridPane gridPaneTableDeploysOP;
 
     @FXML
     protected Tab Eis3OpTab;
