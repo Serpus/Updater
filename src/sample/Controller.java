@@ -1333,30 +1333,60 @@ public class Controller extends DeployController {
     /**
      * Открываем все билды
      */
-    public void openAllDeploys1op() {
-        /*for (Label i : statusDeploysListView1op.getItems()) {
+    public void openAllDeploysEis3op() {
+        for (Label i : statusDeploysListViewEis3Op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
             log.info("URL: " + url);
             goToUrl(url);
-        }*/
+        }
     }
 
-    public void openAllDeploys2op() {
-        /*for (Label i : statusDeploysListView2op.getItems()) {
+    /**
+     * Открываем все билды
+     */
+    public void openAllDeploysEis4op() {
+        for (Label i : statusDeploysListViewEis4Op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
             log.info("URL: " + url);
             goToUrl(url);
-        }*/
+        }
     }
 
-    public void openAllDeploys3op() {
-        /*for (Label i : statusDeploysListView3op.getItems()) {
+    /**
+     * Открываем все билды
+     */
+    public void openAllDeploysEis5op() {
+        for (Label i : statusDeploysListViewEis5Op.getItems()) {
             String labelText = i.getText();
             String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
             log.info("URL: " + url);
             goToUrl(url);
-        }*/
+        }
+    }
+
+    /**
+     * Открываем все билды
+     */
+    public void openAllDeploysEis6op() {
+        for (Label i : statusDeploysListViewEis6Op.getItems()) {
+            String labelText = i.getText();
+            String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+            log.info("URL: " + url);
+            goToUrl(url);
+        }
+    }
+
+    /**
+     * Открываем все билды
+     */
+    public void openAllDeploysEis7op() {
+        for (Label i : statusDeploysListViewEis7Op.getItems()) {
+            String labelText = i.getText();
+            String url = labelText.substring(labelText.indexOf("https://ci-sel.dks.lanit.ru/"));
+            log.info("URL: " + url);
+            goToUrl(url);
+        }
     }
 }
