@@ -150,9 +150,10 @@ public class Builder extends Base {
         for (Project x : allProjectList) {
             if (x.planKey.key.contains("TECH-TECHSUPPORT")) otherProjectsList.add(x);
             if (x.planKey.key.contains("TECH-FSTORETECHWF")) otherProjectsList.add(x);
-            if (x.planKey.key.contains("DBF-DBFSCHED")) otherProjectsList.add(x);
-            if (x.planKey.key.contains("DBF-DBFADM")) otherProjectsList.add(x);
-            if (x.planKey.key.contains("DBF-DBF")) otherProjectsList.add(x);
+            if (x.planKey.key.equalsIgnoreCase("DBF-DBFSCHED")) otherProjectsList.add(x);
+            if (x.planKey.key.equalsIgnoreCase("DBF-DBFADM")) otherProjectsList.add(x);
+            if (x.planKey.key.equalsIgnoreCase("DBF-DBFGG")) otherProjectsList.add(x);
+            if (x.planKey.key.equalsIgnoreCase("DBF-DBF")) otherProjectsList.add(x);
         }
 
         return otherProjectsList;
