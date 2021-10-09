@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Сборщик");
         primaryStage.setScene(new Scene(root, 769, 535));
@@ -20,10 +20,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
-        /*String localDate = LocalDateTime.now().toString();
-        localDate = localDate.substring(0, localDate.indexOf("."))
-                .replace(":", "-")
-                .replace("T", "_");*/
         launch(args);
     }
 }
