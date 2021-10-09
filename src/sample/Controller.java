@@ -463,6 +463,7 @@ public class Controller extends DeployController {
             errorBuildPlans.setVisible(true);
         }
         deployTab.setDisable(false);
+        deployTabOP.setDisable(false);
         refreshBranchesStatus();
     }
 
