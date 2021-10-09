@@ -260,7 +260,7 @@ public class DeployControllerOP {
         openAllDeploysEis7Op.setDisable(true);
     }
 
-    private void disableAllStandsTab() {
+    protected void disableAllStandsTab() {
         Eis3OpTab.setDisable(true);
         Eis4OpTab.setDisable(true);
         Eis5OpTab.setDisable(true);
@@ -268,7 +268,17 @@ public class DeployControllerOP {
         Eis7OpTab.setDisable(true);
     }
 
+    protected void enableAllStandsTab() {
+        Eis3OpTab.setDisable(false);
+        Eis4OpTab.setDisable(false);
+        Eis5OpTab.setDisable(false);
+        Eis6OpTab.setDisable(false);
+        Eis7OpTab.setDisable(false);
+    }
+
     public void confirmStands() {
+        enableAllStandsTab();
+        disableAllStandsTab();
         standNameOP.setDisable(true);
         standName2op.setDisable(true);
         standName3op.setDisable(true);
