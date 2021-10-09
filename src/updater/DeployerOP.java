@@ -100,19 +100,19 @@ public class DeployerOP extends Builder {
         /* String json = "{'planResultKey':'EIS-EISRDIKWF40-14'," +
                     "'name':'release-11.0.0-14'," +
                     "'nextVersionName':'release-11.0.0-15'}";*/
-        String json = "{\"planResultKey\":\"" + project.results.oneResult.buildResultKey + "\"," +
-                "\"name\":\"" + project.results.oneResult.plan.shortName + "-" + project.results.oneResult.buildNumber + "-" + shortStand + "\"," +
-                "\"nextVersionName\":\"" + project.results.oneResult.plan.shortName + "-" + (project.results.oneResult.buildNumber + 1) + "-" + shortStand + "\"}";
+        String json = "{\"planResultKey\":\"" + project.oneResult.buildResultKey + "\"," +
+                "\"name\":\"" + project.oneResult.plan.shortName + "-" + project.oneResult.buildNumber + "-" + shortStand + "\"," +
+                "\"nextVersionName\":\"" + project.oneResult.plan.shortName + "-" + (project.oneResult.buildNumber + 1) + "-" + shortStand + "\"}";
         log.info("JSON: " + json);
 //            String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/65404967/version";
         String request = "https://ci-sel.dks.lanit.ru/rest/api/latest/deploy/project/" + project.currentEnvironment.deploymentProjectId + "/version";
         log.info("request release: " + request);
-        /*String response = base.getResponsePost(request, json);
+        String response = base.getResponsePost(request, json);
         log.info("response: " + response);
         Gson g = new Gson();
         JsonReader reader = new JsonReader(new StringReader(response));
         Version version = g.fromJson(reader, Version.class);
-        project.setVersionOp(version);*/
+        project.setVersionOp(version);
     }
 
     /**
@@ -158,12 +158,12 @@ public class DeployerOP extends Builder {
                         "environmentId=" + p.currentEnvironment.id +
                         "&versionId=" + p.versionOp.id;
         log.info("request deploy: " + url);
-        /*String response = base.getResponsePost(url, "");
+        String response = base.getResponsePost(url, "");
         Gson g = new Gson();
         JsonReader reader = new JsonReader(new StringReader(response));
         DeploymentResultId deploymentResultId = g.fromJson(reader, DeploymentResultId.class);
         p.setDeploymentResultIdOp(deploymentResultId);
-        log.info("deploymentResultId: " + deploymentResultId);*/
+        log.info("deploymentResultId: " + deploymentResultId);
     }
 
     public void getDeployResult(Stand stand) {

@@ -1084,7 +1084,7 @@ public class Controller extends DeployController {
             if (r.buildNumber == buildNumber) {
                 temp = r;
                 project.results.result = null;
-                project.results.oneResult = temp;
+                project.oneResult = temp;
             }
         }
     }
@@ -1181,20 +1181,20 @@ public class Controller extends DeployController {
 
         if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
             statusDeploysListViewEis3Op.getItems().add(new Label());
-            statusDeploysListViewEis3Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = В процессе или очереди\n" +
+            statusDeploysListViewEis3Op.getItems().get(i).setText(p.oneResult.plan.name + " = В процессе или очереди\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("SUCCESS")) {
             statusDeploysListViewEis3Op.getItems().add(new Label());
-            statusDeploysListViewEis3Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis3Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis3Op.getItems().get(i).setTextFill(Paint.valueOf("Green"));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("FAILED")) {
             statusDeploysListViewEis3Op.getItems().add(new Label());
-            statusDeploysListViewEis3Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis3Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis3Op.getItems().get(i).setTextFill(Paint.valueOf("Red"));
         }
@@ -1213,20 +1213,20 @@ public class Controller extends DeployController {
 
         if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
             statusDeploysListViewEis4Op.getItems().add(new Label());
-            statusDeploysListViewEis4Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = В процессе или очереди\n" +
+            statusDeploysListViewEis4Op.getItems().get(i).setText(p.oneResult.plan.name + " = В процессе или очереди\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("SUCCESS")) {
             statusDeploysListViewEis4Op.getItems().add(new Label());
-            statusDeploysListViewEis4Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis4Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis4Op.getItems().get(i).setTextFill(Paint.valueOf("Green"));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("FAILED")) {
             statusDeploysListViewEis4Op.getItems().add(new Label());
-            statusDeploysListViewEis4Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis4Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis4Op.getItems().get(i).setTextFill(Paint.valueOf("Red"));
         }
@@ -1245,20 +1245,20 @@ public class Controller extends DeployController {
 
         if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
             statusDeploysListViewEis5Op.getItems().add(new Label());
-            statusDeploysListViewEis5Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = В процессе или очереди\n" +
+            statusDeploysListViewEis5Op.getItems().get(i).setText(p.oneResult.plan.name + " = В процессе или очереди\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("SUCCESS")) {
             statusDeploysListViewEis5Op.getItems().add(new Label());
-            statusDeploysListViewEis5Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis5Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis5Op.getItems().get(i).setTextFill(Paint.valueOf("Green"));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("FAILED")) {
             statusDeploysListViewEis5Op.getItems().add(new Label());
-            statusDeploysListViewEis5Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis5Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis5Op.getItems().get(i).setTextFill(Paint.valueOf("Red"));
         }
@@ -1277,20 +1277,20 @@ public class Controller extends DeployController {
 
         if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
             statusDeploysListViewEis6Op.getItems().add(new Label());
-            statusDeploysListViewEis6Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = В процессе или очереди\n" +
+            statusDeploysListViewEis6Op.getItems().get(i).setText(p.oneResult.plan.name + " = В процессе или очереди\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("SUCCESS")) {
             statusDeploysListViewEis6Op.getItems().add(new Label());
-            statusDeploysListViewEis6Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis6Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis6Op.getItems().get(i).setTextFill(Paint.valueOf("Green"));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("FAILED")) {
             statusDeploysListViewEis6Op.getItems().add(new Label());
-            statusDeploysListViewEis6Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis6Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis6Op.getItems().get(i).setTextFill(Paint.valueOf("Red"));
         }
@@ -1309,20 +1309,20 @@ public class Controller extends DeployController {
 
         if (deploymentState.equalsIgnoreCase("UNKNOWN")) {
             statusDeploysListViewEis7Op.getItems().add(new Label());
-            statusDeploysListViewEis7Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = В процессе или очереди\n" +
+            statusDeploysListViewEis7Op.getItems().get(i).setText(p.oneResult.plan.name + " = В процессе или очереди\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("SUCCESS")) {
             statusDeploysListViewEis7Op.getItems().add(new Label());
-            statusDeploysListViewEis7Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis7Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis7Op.getItems().get(i).setTextFill(Paint.valueOf("Green"));
             i++;
         }
         if (deploymentState.equalsIgnoreCase("FAILED")) {
             statusDeploysListViewEis7Op.getItems().add(new Label());
-            statusDeploysListViewEis7Op.getItems().get(i).setText(p.results.oneResult.plan.name + " = " + deploymentState + "\n" +
+            statusDeploysListViewEis7Op.getItems().get(i).setText(p.oneResult.plan.name + " = " + deploymentState + "\n" +
                     createUrlForDeploy(p.deploymentResultIdOp.deploymentResultId));
             statusDeploysListViewEis7Op.getItems().get(i).setTextFill(Paint.valueOf("Red"));
         }

@@ -3,6 +3,7 @@ package parser.project;
 import parser.project.branches.Branch;
 import parser.project.buildResult.BuildResult;
 import parser.project.buildResult.BuildResultStatus;
+import parser.project.buildResult.allResultsInBranch.Result;
 import parser.project.buildResult.allResultsInBranch.Results;
 import parser.project.deploys.DeploymentResult;
 import parser.project.deploys.DeploymentResultId;
@@ -20,6 +21,7 @@ public class Project {
     public BuildResult buildResult;
     public BuildResultStatus buildResultStatus;
     public Results results;
+    public Result oneResult;
     public Environments currentEnvironment;
     public Version[] version = new Version[3];
     public Version versionOp = new Version();
