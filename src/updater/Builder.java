@@ -235,6 +235,33 @@ public class Builder extends Base {
         localList.clear();
     }
 
+    /**
+     * Получаем все ветки для ОЧ и убираем, которые не нужно обновлять (нет ветки) и сетим в общую мапу
+     * @param branchName Имя ветки. Значение введено пользователем
+     */
+    public void setBranchesOpInMap(final String branchName) {
+        Gson g = new Gson();
+        List<Project> localList = new ArrayList<>();
+
+        for (Project x: allProjectsMap.get("EPZ")) {
+            String responseBranches = getResponse2("https://ci-sel.dks.lanit.ru/rest/api/latest/plan/" + x.planKey.key + "/branch");
+            log.info("responseBranches: " + responseBranches);
+            JsonReader reader = new JsonReader(new StringReader(responseBranches));
+            BuildBranches buildBranches = g.fromJson(reader, BuildBranches.class);
+            for (Branch i : buildBranches.branches.branch) {
+                if (i.shortName.equalsIgnoreCase(branchName)) {
+                    i.name = i.name.replace("EPZ - ", "");
+                    i.name = i.name.replace("Sphinx - ", "");
+                    x.setBranch(i);
+                    localList.add(x);
+                    log.info("Project " + x.planKey.key + " has branch: " + i);
+                }
+            }
+        }
+        projectsWithBranchesMap.put("EPZ", new ArrayList<>(localList));
+        localList.clear();
+    }
+
     public final List<String> unStartedBuilds = new ArrayList<>();
     /**
      * Запускаем нужные билды
