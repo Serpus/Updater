@@ -117,6 +117,10 @@ public class Controller extends DeployController {
         // Проверка на заполнение имени ветки
         if (!branch.getText().isEmpty()) {
             branchError.setVisible(false);
+            deployTabOP.setDisable(false);
+        }
+        if (branch.getText().isEmpty()) {
+            deployTabOP.setDisable(true);
         }
 
         // Проверка формата стенда
