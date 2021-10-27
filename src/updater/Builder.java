@@ -277,8 +277,7 @@ public class Builder extends Base {
             Request request = new Request.Builder()
                     .addHeader("Authorization", credential)
                     .addHeader("Accept", "application/json")
-                    .addHeader("Coockie",
-                            "JSESSIONID=D70C04C50FE50EA25CF5504B571C73FD")
+                    .addHeader("Cookie", "bamboouserauth=triangle-happier-ecard-climate-scoreless-stubborn")
                     .addHeader("User-Agent", "OkHttp Bot")
                     .url("https://ci-sel.dks.lanit.ru/rest/api/latest/queue/" + p.branch.key)
                     .post(body)
