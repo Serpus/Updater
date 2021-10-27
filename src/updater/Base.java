@@ -44,8 +44,7 @@ public class Base {
                 .url(setRequest)
                 .addHeader("Authorization", credential)
                 .addHeader("Accept", "application/json")
-                .addHeader("Coockie",
-                        "JSESSIONID=D70C04C50FE50EA25CF5504B571C73FD")
+                .addHeader("Cookie", "bamboouserauth=triangle-happier-ecard-climate-scoreless-stubborn")
                 .addHeader("User-Agent", "OkHttp Bot")
                 .build();
         try (Response response = httpClient.newCall(request).execute()) {
@@ -55,7 +54,7 @@ public class Base {
             response1 = response.body().string();
             httpClient.connectionPool().evictAll();
         } catch (IOException e) {
-            log.info("" + e);
+            log.error(e);
             httpClient.connectionPool().evictAll();
         }
         return response1;
@@ -67,9 +66,10 @@ public class Base {
             response = Unirest.get(url)
                     .basicAuth(username, password)
                     .header("Accept", "application/json")
+                    .header("Cookie", "bamboouserauth=triangle-happier-ecard-climate-scoreless-stubborn")
                     .asJson();
         } catch (UnirestException e) {
-            e.printStackTrace();
+            log.error(e);
             getResponse(url);
         }
 
@@ -91,8 +91,7 @@ public class Base {
         Request request = new Request.Builder()
                 .addHeader("Authorization", credential)
                 .addHeader("Accept", "application/json")
-                .addHeader("Coockie",
-                        "JSESSIONID=D70C04C50FE50EA25CF5504B571C73FD")
+                .addHeader("Cookie", "bamboouserauth=triangle-happier-ecard-climate-scoreless-stubborn")
                 .addHeader("User-Agent", "OkHttp Bot")
                 .url(setRequest)
                 .post(body)
@@ -104,7 +103,7 @@ public class Base {
                 throw new IOException("Unexpected code " + response);
             httpClient.connectionPool().evictAll();
         } catch (IOException e) {
-            System.out.println(e);
+            log.error(e);
             httpClient.connectionPool().evictAll();
         }
         return response1;
