@@ -689,7 +689,11 @@ public class Controller extends DeployController {
         for (MenuItem item : deployStatusStandMenu.getItems()) {
             log.info("Current ITEM: " + item.getText());
             i++;
-            deployer.createRelease(i, item.getText());
+            int code = deployer.createRelease(i, item.getText());
+            if (code != 0) {
+                log.info("Не деплоим");
+                continue;
+            }
             deployer.deploy(i);
         }
         deployModal.setVisible(false);

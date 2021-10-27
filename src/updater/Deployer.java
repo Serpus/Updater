@@ -42,7 +42,7 @@ public class Deployer extends Builder {
     /**
      * Делаем релиз
      */
-    public void createRelease(final int number, final String standNameLocal) {
+    public int createRelease(final int number, final String standNameLocal) {
         String standNameShort = standNameLocal.replace("ЕИС-", "");
         try {
             for (Project p : buildsToDeploy) {
@@ -51,6 +51,10 @@ public class Deployer extends Builder {
                         p.setCurrentEnvironment(e);
                         break;
                     }
+                }
+                if (p.currentEnvironment == null) {
+                    log.error("Для билд-плана " + p.name + " отсутствует окружение для стенда " + standNameLocal);
+                    return 1;
                 }
                /* String json = "{'planResultKey':'EIS-EISRDIKWF40-14'," +
                         "'name':'release-11.0.0-14'," +
@@ -75,6 +79,7 @@ public class Deployer extends Builder {
             log.info("" + e);
             throw e;
         }
+        return 0;
     }
 
     /**
