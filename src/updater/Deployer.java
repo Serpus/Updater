@@ -42,7 +42,7 @@ public class Deployer extends Builder {
     /**
      * Делаем релиз
      */
-    public int createRelease(final int number, final String standNameLocal) {
+    public void createRelease(final int number, final String standNameLocal) {
         String standNameShort = standNameLocal.replace("ЕИС-", "");
         try {
             for (Project p : buildsToDeploy) {
@@ -54,7 +54,7 @@ public class Deployer extends Builder {
                 }
                 if (p.currentEnvironment == null) {
                     log.error("Для билд-плана " + p.name + " отсутствует окружение для стенда " + standNameLocal);
-                    return 1;
+                    continue;
                 }
                /* String json = "{'planResultKey':'EIS-EISRDIKWF40-14'," +
                         "'name':'release-11.0.0-14'," +
@@ -79,7 +79,6 @@ public class Deployer extends Builder {
             log.info("" + e);
             throw e;
         }
-        return 0;
     }
 
     /**
@@ -100,6 +99,10 @@ public class Deployer extends Builder {
             }
             }*/
         for (Project p : deployOnStands.get(number)) {
+            if (p.currentEnvironment == null) {
+                log.error("Для билд-плана " + p.name + " отсутствует окружение для стенда. Не деплоим");
+                continue;
+            }
             // String url = "https://ci-sel.dks.lanit.ru/rest/api/latest/queue/deployment?environmentId=&versionId=";
             String url =
                     "https://ci-sel.dks.lanit.ru/rest/api/latest/queue/deployment?" +
