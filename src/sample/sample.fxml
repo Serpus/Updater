@@ -382,11 +382,6 @@
             <Button fx:id="connectToBamboo" layoutX="315.0" layoutY="308.0" mnemonicParsing="false" onAction="#connectToBamboo" text="Соединение с bamboo" />
             <Label fx:id="status" alignment="CENTER" layoutX="281.0" layoutY="335.0" prefHeight="34.0" prefWidth="209.0" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
             <Label fx:id="logopasError" alignment="CENTER" layoutX="281.0" layoutY="213.0" prefHeight="17.0" prefWidth="209.0" text="Введите логин и пароль" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
-            <Label layoutX="688.0" layoutY="519.0" prefHeight="16.0" prefWidth="68.0" text="v.1.2_28.10-1">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
       <DialogPane fx:id="newBuildingModal" layoutX="266.0" layoutY="190.0" minHeight="156.0" minWidth="238.0" prefHeight="156.0" prefWidth="238.0" style="-fx-border-color: black; -fx-border-width: 2;" visible="false">
@@ -431,5 +426,10 @@
             </AnchorPane>
          </content>
       </DialogPane>
+      <Label layoutX="701.0" layoutY="519.0" prefHeight="16.0" prefWidth="68.0" text="v.1.2_23.11-1">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
